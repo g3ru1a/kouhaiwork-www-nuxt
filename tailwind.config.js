@@ -1,0 +1,27 @@
+module.exports = {
+  purge: [],
+  darkMode: false, // or 'media' or 'class'
+  theme: {
+    extend: {
+      colors: {
+        theme: "#7191C0",
+        'theme-light': '#D4E2FC',
+        'theme-dark': '#274e87'
+      },
+      fontFamily: {
+        montseratt: ['Montseratt', 'sans-serif'],
+        poppins: ['Poppins', 'serif'],
+      },
+      boxShadow: {
+        '2xl': '0 5px 30px 5px rgba(0, 0, 0, 0.5)',
+      },
+      margin: {
+        '-screen': '-100vw'
+      },
+    },
+  },
+  variants: {
+    extend: {},
+  },
+  plugins: [],
+}
