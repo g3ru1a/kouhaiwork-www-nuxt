@@ -1,6 +1,15 @@
 <template>
-    <div class="sidenav" :class="[open ? '' : 'closed']">
-        <img class="sidenav-logo" src="/logo.png" alt="">
+    <div class="sidenav" 
+        :class="{'closed': !open}">
+        
+        <div class="relative">
+            <img class="sidenav-logo" src="/logo.png" alt="">
+            <p @click="$emit('toggle_nav')" class="absolute top-0 right-0 p-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </p>
+        </div>
         <p class="sidenav-brand">Kouhai.Work</p>
         <nav class="sidenav-links">
             <nuxt-link class="sidenav-header active" to="/">Home</nuxt-link>
@@ -59,11 +68,11 @@ a.sidenav-header.active  {
 }
 
 .sidenav {
-    @apply pb-8 absolute lg:static w-80 h-screen bg-gray-700 text-white transition-all duration-150 transform z-50;
+    @apply pb-8 fixed w-80 h-screen bg-gray-700 text-white transition-all duration-150 transform z-50;
     @apply max-h-screen overflow-y-auto overflow-x-hidden
 }
 
 .sidenav.closed {
-    @apply -translate-x-full lg:-translate-x-0;
+    @apply -translate-x-full;
 }
 </style>

@@ -1,0 +1,16 @@
+/* TAGS */
+.tag-container {
+    @apply mb-2 flex flex-wrap items-center justify-start space-x-2 space-y-1
+}
+
+.tag {
+    @apply px-2 py-1 bg-gray-200 text-sm
+}
+body {
+    @apply bg-gray-100
+}
+
+.scale-200 {
+    --tw-scale-x: 2;
+--tw-scale-y: 2;
+}
