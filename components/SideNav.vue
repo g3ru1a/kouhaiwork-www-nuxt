@@ -2,37 +2,49 @@
     <div class="sidenav" 
         :class="{'closed': !open}">
         
-        <div class="relative">
+        <nuxt-link to="/" class="relative">
             <img class="sidenav-logo" src="/logo.png" alt="">
             <p @click="$emit('toggle_nav')" class="absolute top-0 right-0 p-4">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </p>
-        </div>
+        </nuxt-link>
         <p class="sidenav-brand">Kouhai.Work</p>
+        <client-only>
         <nav class="sidenav-links">
             <nuxt-link class="sidenav-header active" to="/">Home</nuxt-link>
             <h2 class="sidenav-header">Series</h2>
             <nuxt-link class="sidenav-link" to="/">Search Series</nuxt-link>
             <h2 class="sidenav-header">Kouhai Work</h2>
             <nuxt-link class="sidenav-link" to="/">Announcements</nuxt-link>
-            <h2 class="sidenav-header">Groups</h2>
-            <nuxt-link class="sidenav-link" to="/">Upload</nuxt-link>
-            <nuxt-link class="sidenav-link" to="/">My Groups</nuxt-link>
-            <nuxt-link class="sidenav-link" to="/">My Chapters</nuxt-link>
-            <h2 class="sidenav-header">Admin</h2>
-            <nuxt-link class="sidenav-link" to="/">Dashboard</nuxt-link>
-            <nuxt-link class="sidenav-link" to="/">Series</nuxt-link>
-            <nuxt-link class="sidenav-link" to="/">Chapters</nuxt-link>
-            <nuxt-link class="sidenav-link" to="/">Users</nuxt-link>
-            <nuxt-link class="sidenav-link" to="/">Groups</nuxt-link>
-            <h2 class="sidenav-header">Me - {User}</h2>
-            <nuxt-link class="sidenav-link" to="/">Logout</nuxt-link>
-            <h2 class="sidenav-header">Account</h2>
-            <nuxt-link class="sidenav-link" to="/">Login</nuxt-link>
-            <nuxt-link class="sidenav-link" to="/">Register</nuxt-link>
+            <template v-if="$store.getters.isRank2">
+                <h2 class="sidenav-header">Groups</h2>
+                <nuxt-link class="sidenav-link" to="/">Upload</nuxt-link>
+                <nuxt-link class="sidenav-link" to="/">My Groups</nuxt-link>
+                <nuxt-link class="sidenav-link" to="/">My Chapters</nuxt-link>
+            </template>
+            <template v-if="$store.getters.isRank3">
+                <h2 class="sidenav-header">Admin</h2>
+                <nuxt-link class="sidenav-link" to="/">Dashboard</nuxt-link>
+                <nuxt-link class="sidenav-link" to="/">Series</nuxt-link>
+                <nuxt-link class="sidenav-link" to="/">Chapters</nuxt-link>
+                <nuxt-link class="sidenav-link" to="/">Users</nuxt-link>
+                <nuxt-link class="sidenav-link" to="/">Groups</nuxt-link>
+            </template>
+            <template v-if="$store.state.authenticated">
+                <h2 class="sidenav-header">Me - {{$store.state.user.name}}</h2>
+                <nuxt-link class="sidenav-link" to="/">Profile</nuxt-link>
+                <nuxt-link class="sidenav-link" to="/">Settings</nuxt-link>
+                <nuxt-link class="sidenav-link" to="/logout">Logout</nuxt-link>
+            </template>
+            <template v-if="!$store.state.authenticated">
+                <h2 class="sidenav-header">Account</h2>
+                <nuxt-link class="sidenav-link" to="/login">Login</nuxt-link>
+                <nuxt-link class="sidenav-link" to="/register">Register</nuxt-link>
+            </template>
         </nav>
+        </client-only>
     </div>
 </template>
 

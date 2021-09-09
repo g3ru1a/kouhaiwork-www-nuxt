@@ -14,3 +14,78 @@ body {
     --tw-scale-x: 2;
 --tw-scale-y: 2;
 }
+
+.panel {
+    @apply p-4 mx-2 md:mx-0
+}
+
+.panel-shadow {
+    @apply shadow-lg
+}
+
+.panel-compact {
+    @apply w-full md:mx-auto md:w-4/5 lg:w-3/5 xl:w-2/5 2xl:w-1/3
+}
+
+.panel-white {
+    @apply bg-white
+}
+
+.panel-title {
+    @apply text-2xl mb-4 text-center
+}
+
+.form-group {
+    @apply w-full mb-4
+}
+
+.form-input {
+    @apply px-4 py-2 w-full shadow
+}
+
+.form-error {
+    @apply px-2 py-1 bg-red-400 text-white text-sm rounded-t text-center
+}
+
+.form-success {
+    @apply px-2 py-1 bg-green-500 text-white text-sm rounded-t text-center
+}
+
+.link {
+    @apply text-theme
+}
+
+.link:hover {
+    @apply text-theme-dark
+}
+
+.btn {
+    @apply px-4 py-2 mb-4
+}
+
+.btn-block {
+    @apply w-full
+}
+
+.btn-theme {
+    @apply bg-theme text-white
+}
+
+.btn-theme:hover {
+    @apply bg-theme-dark text-white
+}
+
+
+
+::-webkit-input-placeholder {
+   font-style: italic;
+}
+:-moz-placeholder {
+   font-style: italic;  
+}
+::-moz-placeholder {
+   font-style: italic;  
+}
+:-ms-input-placeholder {  
+   font-style: italic; 
+}

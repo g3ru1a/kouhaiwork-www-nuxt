@@ -45,7 +45,7 @@ export default {
 	@apply text-xl text-center py-6 font-semibold;
 }
 .series-container {
-	@apply px-4 flex flex-row flex-wrap justify-center;
+	@apply px-4 flex flex-row flex-wrap justify-center items-stretch;
 }
 .series {
 	@apply w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/4 3xl:w-1/5 p-2;
@@ -54,10 +54,10 @@ export default {
 	@apply shadow-2xl scale-105 z-50
 }
 .series-inner {
-    @apply relative flex flex-col items-center transform transition-all duration-150 rounded-lg z-10 cursor-pointer
+    @apply h-full bg-white flex flex-col items-center transform transition-all duration-150 rounded-lg z-10 cursor-pointer
 }
 .series-info {
-    @apply py-2 absolute bottom-0 text-center bg-black bg-opacity-50 text-white w-full rounded-b-lg z-10
+    @apply py-2 bottom-0 text-center bg-opacity-50 text-black w-full rounded-b-lg z-10
 }
 .series-cover {
     @apply w-full h-72 object-cover rounded-lg z-0
