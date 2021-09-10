@@ -3,11 +3,29 @@
     @apply mb-2 flex flex-wrap items-center justify-start space-x-2 space-y-1
 }
 
+.tag-container-centered {
+    @apply mb-2 flex flex-wrap items-center justify-center
+}
+
+.tag-sp {
+    @apply px-2 py-1 bg-gray-200 text-sm mx-1 my-1 flex items-center cursor-pointer
+}
+
 .tag {
     @apply px-2 py-1 bg-gray-200 text-sm
 }
+
+.tag-red {
+    @apply bg-red-400 text-white
+}
+.tag-theme {
+    @apply bg-theme text-white
+}
 body {
     @apply bg-gray-100
+}
+.resp-container {
+    @apply w-full px-2 md:px-4 lg:px-0 lg:mx-auto lg:w-4/5 2xl:w-2/3 3xl:w-1/2
 }
 
 .scale-200 {
@@ -16,7 +34,7 @@ body {
 }
 
 .panel {
-    @apply p-4 mx-2 md:mx-0
+    @apply mb-4 p-4 mx-2 md:mx-0
 }
 
 .panel-shadow {
@@ -39,8 +57,16 @@ body {
     @apply w-full mb-4
 }
 
+.form-group-inline {
+    @apply w-full mb-4 flex items-stretch
+}
+
 .form-input {
-    @apply px-4 py-2 w-full shadow
+    @apply px-4 py-2 w-full shadow focus:outline-none
+}
+
+.form-select {
+    @apply px-4 py-2 w-full shadow bg-white flex-1
 }
 
 .form-error {
@@ -60,11 +86,11 @@ body {
 }
 
 .btn {
-    @apply px-4 py-2 mb-4
+    @apply px-4 py-2
 }
 
 .btn-block {
-    @apply w-full
+    @apply w-full mb-4
 }
 
 .btn-theme {
@@ -88,4 +114,28 @@ body {
 }
 :-ms-input-placeholder {  
    font-style: italic; 
+}
+
+
+/* width */
+::-webkit-scrollbar {
+	width: 6px;
+	height: 6px;
+}
+
+/* width */
+.nobar::-webkit-scrollbar {
+	width: 0;
+	height: 0;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	box-shadow: inset 0 0 5px grey;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: rgb(85, 85, 85);
+	border-radius: 10px;
 }

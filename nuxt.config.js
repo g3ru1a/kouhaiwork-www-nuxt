@@ -30,12 +30,22 @@ export default {
 	},
 
 	// Global CSS: https://go.nuxtjs.dev/config-css
-	css: ["~/assets/custom.css"],
+	css: [
+		"~/assets/custom.css",
+
+		"quill/dist/quill.core.css",
+		// for snow theme
+		"quill/dist/quill.snow.css"
+		// for bubble theme
+		// "quill/dist/quill.bubble.css"
+	],
 
 	// Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
 	plugins: [
+		{ src: "~plugins/nuxt-quill-plugin", ssr: false },
 		{ src: "~plugins/vuex-persist.js", ssr: false },
-		"~/plugins/axios"
+		"~/plugins/axios",
+		"~/plugins/directives"
 	],
 
 	// Auto import components: https://go.nuxtjs.dev/config-components
