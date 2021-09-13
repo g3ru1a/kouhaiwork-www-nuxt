@@ -22,7 +22,7 @@
 			/>
 			<p
 				v-show="!open && (selection == null || selection.length == 0)"
-				class="text-gray-400 italic"
+				class="text-gray-400 italic truncate"
 			>
 				Select {{ title }}
 			</p>
@@ -67,7 +67,7 @@
 		</div>
 		<div
 			v-show="open && options && options.length > 0"
-			class="mt-1 absolute flex flex-col shadow-lg w-full max-h-40 overflow-y-scroll"
+			class="mt-1 absolute flex flex-col shadow-lg w-full max-h-40 overflow-y-scroll z-50"
 		>
 			<p
 				class="px-4 py-2 text-gray-800 bg-white text-left italic"
@@ -103,7 +103,7 @@
 			</button>
 		</div>
 
-		<div v-show="open" class="tag-container-centered mt-44">
+		<div v-show="open" class="absolute tag-container-centered mt-44 z-50">
 			<div
 				v-show="search == '' && multiple"
 				v-for="opt in selection"
@@ -184,8 +184,8 @@ export default {
 	},
 	watch: {
 		selection: function(val) {
-			console.log(val);
 			this.$forceUpdate();
+			this.$emit('sel_change', val);
 		}
 	},
 	computed: {

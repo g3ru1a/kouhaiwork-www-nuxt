@@ -1,8 +1,8 @@
 <template>
 	<div>
 		<Banner></Banner>
-		<UpdatedThisWeek></UpdatedThisWeek>
-		<AllSeries></AllSeries>
+		<UpdatedThisWeek class="week-section"></UpdatedThisWeek>
+		<AllSeries class="week-section"></AllSeries>
 	</div>
 </template>
 
@@ -11,6 +11,14 @@ export default {
 };
 </script>
 
-<style scoped>
-
+<style>
+.week-section:nth-child(0){
+	@apply text-red-300
+}
+.week-section:last-child {
+	@apply lg:mx-auto lg:w-4/5 
+}
+.week-section {
+	@apply pb-4
+}
 </style>

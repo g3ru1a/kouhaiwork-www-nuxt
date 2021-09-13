@@ -13,7 +13,10 @@
 			</div>
 			<p class="banner-synopsis">{{ latest.synopsis }}</p>
 			<div class="banner-action">
-				<button class="banner-button">Check It Out</button>
+				<button class="banner-button" 
+				@click="$router.push(`/read/${latest.chapters[latest.chapters.length - 1].id}`)">
+					Check It Out
+				</button>
 				<p class="banner-ch">
 					<span class="text-theme-dark"
 						>Chapter

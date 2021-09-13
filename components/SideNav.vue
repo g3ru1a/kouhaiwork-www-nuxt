@@ -13,7 +13,7 @@
         <p class="sidenav-brand">Kouhai.Work</p>
         <client-only>
         <nav class="sidenav-links">
-            <nuxt-link class="sidenav-header active" to="/">Home</nuxt-link>
+            <nuxt-link class="sidenav-header" to="/">Home</nuxt-link>
             <h2 class="sidenav-header">Series</h2>
             <nuxt-link class="sidenav-link" to="/search">Search Series</nuxt-link>
             <h2 class="sidenav-header">Kouhai Work</h2>
@@ -75,7 +75,8 @@ export default {
 .sidenav-link:hover,
 a.sidenav-header:hover,
 .sidenav-link.active,
-a.sidenav-header.active  {
+a.sidenav-header.active,
+a.nuxt-link-exact-active  {
     @apply bg-theme scale-110 ml-2
 }
 

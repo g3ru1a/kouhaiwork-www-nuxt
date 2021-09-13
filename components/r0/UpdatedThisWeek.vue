@@ -1,9 +1,9 @@
 <template>
-	<div class="week-section">
-		<h1 class="week-title">New Chapters Released This Week</h1>
+	<div class="bg-white">
+		<h1 class="week-title">Latest Chapters</h1>
 		<div class="series-container">
 			<div class="series" v-for="(series, index) in week" :key="index">
-				<div class="series-inner">
+				<div class="series-inner" @click="$router.push('/series/'+series.id)">
                     <img class="series-cover" :src="series.cover.url" alt="" />
                     <div class="series-info">
                         <h1 class="series-title">{{ series.title }}</h1>
@@ -42,9 +42,6 @@ export default {
 </script>
 
 <style scoped>
-.week-section {
-	@apply bg-white pb-4;
-}
 .week-title {
 	@apply text-xl text-center py-6 font-semibold;
 }

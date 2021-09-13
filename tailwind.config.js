@@ -37,7 +37,10 @@ module.exports = {
 				"80": 80,
 				"90": 90,
 				"100": 100
-			}
+			},
+			spacing: {
+				'80s': '80vh',
+			},
 		}
 	},
 	variants: {
