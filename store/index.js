@@ -1,8 +1,8 @@
-
 export const state = () => ({
 	user: null,
 	token: null,
 	authenticated: false,
+	reader_settings: null,
 });
 
 export const mutations = {
@@ -14,17 +14,24 @@ export const mutations = {
 	},
 	setAuthenticated(state, authenticated) {
 		state.authenticated = authenticated;
-	}
+	},
+	setReaderSettings(state, settings) {
+		state.reader_settings = settings;
+	},
 };
 
 export const getters = {
-	isRank2: (state) => {
-		return state.authenticated && state.user !== null && state.user.rank >= 2;
+	isRank2: state => {
+		return (
+			state.authenticated && state.user !== null && state.user.rank >= 2
+		);
 	},
-	isRank3: (state) => {
-		return state.authenticated && state.user !== null && state.user.rank == 3;
+	isRank3: state => {
+		return (
+			state.authenticated && state.user !== null && state.user.rank == 3
+		);
 	}
-}
+};
 
 export const actions = {
 	clearAuth({ commit }) {

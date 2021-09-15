@@ -74,7 +74,7 @@ export default {
 	@apply flex items-center justify-evenly bg-white shadow-lg max-h-64;
 }
 .result-image {
-	@apply w-36 h-64 object-cover
+	@apply w-36 lg:w-48 h-64 object-cover
 }
 .result-info {
     @apply flex flex-col h-64 

@@ -81,7 +81,7 @@ a.nuxt-link-exact-active  {
 }
 
 .sidenav {
-    @apply pb-8 fixed w-80 h-screen bg-gray-700 text-white transition-all duration-150 transform z-70;
+    @apply pb-8 fixed w-60 md:w-80 h-screen bg-gray-700 text-white transition-all duration-150 transform z-70;
     @apply max-h-screen overflow-y-auto overflow-x-hidden
 }
 
