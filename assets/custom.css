@@ -107,6 +107,15 @@ body {
 .btn-theme {
     @apply bg-theme text-white
 }
+.btn-red {
+    @apply bg-red-400 text-white
+}
+.btn-green {
+    @apply bg-green-500 text-white
+}
+.btn-yellow {
+    @apply bg-yellow-400 text-white
+}
 
 .btn-theme-inv {
     @apply bg-white text-theme border border-theme
@@ -114,6 +123,15 @@ body {
 
 .btn-theme:hover {
     @apply bg-theme-dark text-white
+}
+.btn-red:hover {
+    @apply bg-red-500 text-white
+}
+.btn-green:hover {
+    @apply bg-green-600 text-white
+}
+.btn-yellow:hover {
+    @apply bg-yellow-500 text-white
 }
 .btn-theme-inv:hover {
     @apply bg-theme text-white
@@ -128,6 +146,23 @@ body {
 
 .modal {
     @apply w-full bg-white rounded-md shadow-2xl p-6 sm:w-10/12 lg:w-2/3 xl:w-1/3 mx-2;
+}
+
+.ctable {
+    @apply table-auto w-full
+}
+
+
+.ctable-cell {
+    @apply p-1
+}
+
+.ctable-cell.wide {
+    @apply w-full pr-2
+}
+
+.ctable-row {
+    @apply border-b border-gray-200
 }
 
 ::-webkit-input-placeholder {
