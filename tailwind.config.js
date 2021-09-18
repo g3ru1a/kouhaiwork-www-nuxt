@@ -1,12 +1,26 @@
 module.exports = {
 	purge: [],
-	darkMode: false, // or 'media' or 'class'
+	darkMode: "class", // or 'media' or 'class'
 	theme: {
 		extend: {
 			colors: {
 				theme: "#7191C0",
 				"theme-light": "#D4E2FC",
-				"theme-dark": "#274e87"
+				"theme-dark": "#274e87",
+				dt: {
+					"100": "#121212",
+					"200": "#1e1e1e",
+					"300": "#222222",
+					"400": "#242424",
+					"500": "#272727",
+					"600": "#2c2c2c",
+					"700": "#2e2e2e",
+					"800": "#333333",
+					"900": "#343434",
+					"950": "#383838",
+					theme: "#415269"
+				},
+				nothing: "#FF000000"
 			},
 			fontFamily: {
 				montseratt: ["Montseratt", "sans-serif"],
@@ -40,8 +54,18 @@ module.exports = {
 				"100": 100
 			},
 			spacing: {
-				'80s': '80vh',
+				"80s": "80vh"
 			},
+			backgroundOpacity: {
+				"7": "0.07",
+				"8": "0.08",
+				"9": "0.09",
+				"11": "0.11",
+				"12": "0.12",
+				"14": "0.14",
+				"15": "0.15",
+				"16": "0.16"
+			}
 		}
 	},
 	variants: {

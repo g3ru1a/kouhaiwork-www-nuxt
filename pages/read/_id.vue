@@ -2,7 +2,7 @@
 	<div
 		v-if="chapter && settings"
 		class="w-full h-full"
-		:class="{ 'bg-black': settings.dark }"
+		:class="{ 'bg-black': settings.dark, 'bg-white': !settings.dark}"
 	>
 		<reader-settings
 			:settings="settings"

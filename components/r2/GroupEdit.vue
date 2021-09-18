@@ -1,14 +1,14 @@
 <template>
-	<div>
+	<div class="w-full">
 		<div v-if="!info" class="flex flex-col xl:flex-row text-center items-center justify-center text-xl">
-			<p class="xl:mr-4">Loading</p>
-			<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="background: rgb(241, 242, 243); display: block;" width="25px" height="25px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
-			<circle cx="50" cy="50" fill="none" stroke="#1d0e0b" stroke-width="10" r="35" stroke-dasharray="164.93361431346415 56.97787143782138">
+			<p class="xl:mr-4 dark:text-white">Loading</p>
+			<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="bg-white dark:bg-dt-100 dark:text-white" style="display: block;" width="25px" height="25px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+			<circle cx="50" cy="50" fill="none" class="stroke-current" stroke-width="10" r="35" stroke-dasharray="164.93361431346415 56.97787143782138">
 			<animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
 			</circle>
 			</svg>
 		</div>
-		<div v-if="info" class="w-full p-4 bg-white">
+		<div v-if="info" class="w-full p-4 bg-white shadow rounded-lg dark:bg-dt-300 dark:text-white">
 			<h1 class="text-lg mb-2">
 				Edit Group
 				<span v-if="updating" class="text-sm text-yellow-600"

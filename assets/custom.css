@@ -15,18 +15,18 @@
 }
 
 .tag {
-    @apply px-2 py-1 bg-gray-200 text-sm
+    @apply px-2 py-1 bg-gray-200 text-sm dark:bg-dt-600
 }
 
 .tag-lg {
-    @apply text-lg px-2 py-1 bg-gray-200 mr-2 mb-2
+    @apply text-lg px-2 py-1 bg-gray-200 mr-2 mb-2 dark:bg-dt-600 rounded
 }
 
 .tag-red {
     @apply bg-red-400 text-white
 }
 .tag-theme {
-    @apply bg-theme text-white
+    @apply bg-theme text-white dark:bg-dt-theme
 }
 body {
     @apply bg-gray-100
@@ -53,7 +53,7 @@ body {
 }
 
 .panel-white {
-    @apply bg-white
+    @apply bg-white dark:bg-dt-300 dark:text-white
 }
 
 .panel-title {
@@ -69,7 +69,7 @@ body {
 }
 
 .form-input {
-    @apply px-4 py-2 w-full shadow focus:outline-none
+    @apply px-4 py-2 w-full shadow focus:outline-none dark:bg-dt-700 rounded
 }
 
 .form-select {
@@ -93,7 +93,11 @@ body {
 }
 
 .btn {
-    @apply px-4 py-2 text-center
+    @apply px-4 py-2 text-center dark:bg-opacity-50 rounded
+}
+
+.flat > .btn {
+    @apply rounded-none
 }
 
 .btn-block {
@@ -101,11 +105,11 @@ body {
 }
 
 .btn-tall {
-    @apply px-4 py-3 text-center
+    @apply px-4 py-3 text-center rounded
 }
 
 .btn-theme {
-    @apply bg-theme text-white
+    @apply bg-theme text-white dark:bg-dt-theme
 }
 .btn-red {
     @apply bg-red-400 text-white
@@ -118,7 +122,8 @@ body {
 }
 
 .btn-theme-inv {
-    @apply bg-white text-theme border border-theme
+    @apply bg-white text-theme border border-theme;
+    @apply dark:bg-dt-300
 }
 
 .btn-theme:hover {
@@ -134,7 +139,15 @@ body {
     @apply bg-yellow-500 text-white
 }
 .btn-theme-inv:hover {
-    @apply bg-theme text-white
+    @apply bg-theme text-white dark:bg-theme-dark
+}
+
+.form-group-inline > .btn {
+    @apply rounded-r rounded-l-none
+}
+
+.form-group-inline > .form-input {
+    @apply rounded-l rounded-r-none
 }
 
 .header {
@@ -162,7 +175,7 @@ body {
 }
 
 .ctable-row {
-    @apply border-b border-gray-200
+    @apply border-b border-gray-200 dark:border-dt-800
 }
 
 ::-webkit-input-placeholder {

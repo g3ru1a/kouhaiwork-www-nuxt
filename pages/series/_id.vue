@@ -1,5 +1,5 @@
 <template>
-	<div class="bg-white">
+	<div class="bg-white dark:bg-dt-100">
         <div
             v-if="info"
             class="info">
@@ -42,7 +42,8 @@ export default {
 <style scoped>
 .info {
     @apply min-h-screen flex flex-col items-stretch justify-evenly px-4 pb-12 bg-white;
-    @apply md:px-0 xl:w-2/3 xl:mx-auto 3xl:w-1/2
+    @apply md:px-0 xl:w-2/3 xl:mx-auto 3xl:w-1/2;
+    @apply dark:bg-dt-100 dark:text-white
 }
 .info-group {
     @apply flex flex-col md:flex-row md:items-start md:justify-evenly md:px-4

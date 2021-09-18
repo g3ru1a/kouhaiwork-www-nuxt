@@ -25,7 +25,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                     </svg>
                 </button>
-                <p class="px-4 py-2 text-center bg-theme text-white">
+                <p class="px-4 py-2 text-center bg-theme text-white dark:bg-dt-theme">
                     <span class="hidden md:inline-block">Ch. {{chapter.number}} | Page</span>
                     <span class="md:hidden">Ch. {{chapter.number}} | </span>
                     <span class="">{{pageCounter}}</span>

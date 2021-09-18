@@ -18,9 +18,9 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                 </svg>
             </button>
-            <div class="w-36 flex flex-col transition-all duration-150" :class="{'-mr-36': !open}">
+            <div class="w-36 flex flex-col transition-all duration-150 flat" :class="{'-mr-36': !open}">
                 <button v-if="next_id" @click="nextChap" class="w-full btn btn-theme">Next Chapter</button>
-                <p class="w-full py-2 bg-white border border-theme text-theme text-center">Ch {{chapter.number}}</p>
+                <p class="w-full py-2 bg-white border border-theme text-theme text-center dark:bg-dt-300 dark:border-dt-theme">Ch {{chapter.number}}</p>
                 <button v-if="prev_id" @click="prevChap" class="w-full btn btn-theme">Prev Chapter</button>
             </div>
         </div>

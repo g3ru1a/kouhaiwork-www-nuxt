@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="resp-container">
-			<h1 class="panel-title my-4">Announcements</h1>
+			<h1 class="panel-title my-4 dark:text-white">Announcements</h1>
 			<announcements-editor></announcements-editor>
 			<announcements-list></announcements-list>
 		</div>

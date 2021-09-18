@@ -8,14 +8,14 @@
 				focusedInp ? (open = true) : (open = !open);
 				if (!open) search = '';
 			"
-			class="p-3 w-full bg-white shadow flex justify-between cursor-pointer"
+			class="p-3 w-full bg-white shadow flex justify-between cursor-pointer rounded dark:bg-dt-300"
 		>
 			<input
 				ref="search"
 				v-model="search"
 				v-show="open"
 				type="text"
-				class="w-full h-full focus:outline-none"
+				class="w-full h-full focus:outline-none dark:bg-dt-300"
 				:placeholder="`Search for ${title}`"
 				@focus="focusedInp = true"
 				@blur="focusedInp = false"
@@ -67,10 +67,10 @@
 		</div>
 		<div
 			v-show="open && options && options.length > 0"
-			class="mt-1 absolute flex flex-col shadow-lg w-full max-h-40 overflow-y-scroll z-50"
+			class="mt-1 absolute flex flex-col rounded bg-white dark:bg-dt-300 shadow-lg w-full max-h-40 overflow-y-scroll z-50"
 		>
 			<p
-				class="px-4 py-2 text-gray-800 bg-white text-left italic"
+				class="px-4 py-2 text-gray-800 dark:text-white text-left italic"
 				v-if="filteredOptions.length == 0"
 			>
 				No genres match '{{ search }}'
@@ -213,15 +213,15 @@ export default {
 
 <style scoped>
 .option {
-	@apply px-4 py-2 bg-white text-left;
+	@apply px-4 py-2 text-left bg-white dark:bg-dt-300 dark:text-white;
 }
 
 .option.selected {
-	@apply bg-theme-light;
+	@apply bg-theme-light dark:bg-dt-700;
 }
 
 .option:hover,
 .option.selected:hover {
-	@apply bg-theme text-white;
+	@apply bg-theme text-white dark:bg-dt-700;
 }
 </style>

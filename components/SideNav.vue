@@ -77,12 +77,13 @@ a.sidenav-header:hover,
 .sidenav-link.active,
 a.sidenav-header.active,
 a.nuxt-link-exact-active  {
-    @apply bg-theme scale-110 ml-2
+    @apply bg-theme scale-110 ml-2 dark:bg-dt-900
 }
 
 .sidenav {
     @apply pb-8 fixed w-60 md:w-80 h-screen bg-gray-700 text-white transition-all duration-150 transform z-70;
-    @apply max-h-screen overflow-y-auto overflow-x-hidden
+    @apply max-h-screen overflow-y-auto overflow-x-hidden;
+    @apply dark:bg-dt-200
 }
 
 .sidenav.closed {

@@ -1,5 +1,5 @@
 <template>
-	<div class="bg-white">
+	<div class="bg-white dark:bg-dt-300 dark:text-white">
 		<h1 class="week-title">Latest Chapters</h1>
 		<div class="series-container">
 			<div class="series" v-for="(series, index) in week" :key="index">
@@ -55,10 +55,11 @@ export default {
 	@apply shadow-2xl z-50 scale-105
 }
 .series-inner {
-    @apply h-full flex flex-col items-center transform transition-all duration-150 rounded-lg z-10 cursor-pointer shadow-lg
+    @apply h-full flex flex-col items-center transform transition-all duration-150 rounded-lg z-10 cursor-pointer shadow-lg;
+	@apply dark:bg-dt-600 dark:text-white
 }
 .series-info {
-    @apply py-2  bottom-0 text-center  bg-opacity-50 text-black w-full rounded-b-lg z-10
+    @apply py-2  bottom-0 text-center  bg-opacity-50 text-black w-full rounded-b-lg z-10 dark:text-white
 }
 .series-cover {
     @apply w-full h-72 object-cover rounded-lg z-0

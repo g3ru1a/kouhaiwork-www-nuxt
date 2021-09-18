@@ -71,10 +71,10 @@ export default {
 }
 
 .result-inner {
-	@apply flex items-center justify-evenly bg-white shadow-lg max-h-64;
+	@apply flex items-center justify-evenly bg-white shadow-lg max-h-64 dark:bg-dt-300 rounded;
 }
 .result-image {
-	@apply w-36 lg:w-48 h-64 object-cover
+	@apply w-36 lg:w-48 h-64 object-cover rounded-l
 }
 .result-info {
     @apply flex flex-col h-64 
@@ -93,14 +93,14 @@ export default {
 }
 
 .result-action {
-    @apply bg-theme px-2 py-2 text-white z-20 w-full justify-self-end text-center
+    @apply bg-theme px-2 py-2 text-white z-20 w-full justify-self-end text-center rounded-br dark:bg-dt-theme
 }
 
 .results-settings {
 	@apply mb-4 flex items-center justify-end;
 }
 .result-button {
-	@apply mx-1 px-2 py-2 text-white bg-theme transform rotate-90;
+	@apply mx-1 px-2 py-2 text-white bg-theme transform rotate-90 dark:bg-dt-theme;
 }
 .result-button:hover {
 	@apply bg-theme-dark scale-95;

@@ -1,5 +1,5 @@
 <template>
-	<div class="w-full mb-4 p-4 bg-white">
+	<div class="w-full mb-4 xl:mb-0 p-4 bg-white rounded-lg shadow dark:bg-dt-300 dark:text-white">
 		<h1 class="mb-2 text-lg ">
 			Your Groups
 			<span v-if="updating" class="text-sm text-yellow-600"
@@ -125,7 +125,7 @@ export default {
 				})
 				.catch(err => {
 					this.updating = false;
-					alert(err);
+					console.log(err);
 				});
 		},
 		createGroup() {

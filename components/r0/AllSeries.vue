@@ -39,7 +39,7 @@ export default {
 
 <style scoped>
 .week-title {
-	@apply text-xl text-center py-6 font-semibold;
+	@apply text-xl text-center py-6 font-semibold dark:text-white;
 }
 .series-container {
 	@apply px-4 flex flex-row flex-wrap justify-center items-stretch;
@@ -51,10 +51,11 @@ export default {
 	@apply shadow-2xl scale-105 z-50
 }
 .series-inner {
-    @apply h-full bg-white flex flex-col items-center transform transition-all duration-150 rounded-lg z-10 cursor-pointer
+    @apply h-full bg-white flex flex-col items-center transform transition-all duration-150 rounded-lg z-10 cursor-pointer;
+	@apply dark:bg-dt-500
 }
 .series-info {
-    @apply py-2 bottom-0 text-center bg-opacity-50 text-black w-full rounded-b-lg z-10
+    @apply py-2 bottom-0 text-center bg-opacity-50 text-black w-full rounded-b-lg z-10 dark:text-white
 }
 .series-cover {
     @apply w-full h-72 object-cover rounded-lg z-0

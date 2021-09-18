@@ -62,6 +62,7 @@ export default {
 <style scoped>
 .navbar {
 	@apply w-screen max-h-16 items-center justify-between text-white font-bold uppercase bg-gray-700 transition-all duration-300;
+	@apply dark:bg-dt-200
 }
 .navbar.blocked {
 	@apply z-50 absolute flex;
