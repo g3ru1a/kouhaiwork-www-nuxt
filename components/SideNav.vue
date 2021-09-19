@@ -1,5 +1,5 @@
 <template>
-    <div class="sidenav" 
+    <div class="sidenav nobar" 
         :class="{'closed': !open}">
         
         <nuxt-link to="/" class="relative">
