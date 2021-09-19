@@ -41,8 +41,6 @@ export default {
             if(this.currentPage === this.chapter.pages.length - 1 && this.next_id !== null){
                 this.$router.push("/read/" + this.next_id);
                 return;
-            }else if(this.currentPage === 0 && this.next_id === null){
-                this.$router.push('/series/'+this.chapter.manga_id)
             }
             let ind = this.currentPage < this.chapter.pages.length - 1 ? this.currentPage + 1 : this.chapter.pages.length -1;
             if(skip) ind = this.chapter.pages.length - 1;
@@ -54,8 +52,6 @@ export default {
             if(this.currentPage === 0 && this.prev_id !== null){
                 this.$router.push("/read/" + this.prev_id);
                 return;
-            }else if(this.currentPage === 0 && this.prev_id === null){
-                this.$router.push('/series/'+this.chapter.manga_id)
             }
             let ind = this.currentPage > 0 ? this.currentPage - 1 : 0;
             if(skip) ind = 0;
