@@ -60,12 +60,20 @@ body {
     @apply text-2xl mb-4 text-center
 }
 
+.page-title {
+    @apply text-3xl text-center my-4 dark:text-white
+}
+
 .form-group {
     @apply w-full mb-4
 }
 
 .form-group-inline {
     @apply w-full mb-4 flex items-stretch
+}
+
+.form-group-inline-nm {
+    @apply w-full flex items-stretch
 }
 
 .form-input {
@@ -98,6 +106,10 @@ body {
 
 .flat > .btn {
     @apply rounded-none
+}
+
+.flat-t > .btn {
+    @apply rounded-b rounded-t-none
 }
 
 .btn-block {
@@ -142,12 +154,28 @@ body {
     @apply bg-theme text-white dark:bg-theme-dark
 }
 
-.form-group-inline > .btn {
+.form-group-inline > .btn ,
+.form-group-inline-nm > .btn{
     @apply rounded-r rounded-l-none
 }
 
-.form-group-inline > .form-input {
+.form-group-inline > .form-input,
+.form-group-inline-nm > .form-input {
     @apply rounded-l rounded-r-none
+}
+
+.btn-group {
+    @apply flex flex-col md:flex-row
+}
+.btn-group > .btn {
+    @apply m-1 md:rounded-none md:m-0 md:border-r-0
+}
+.btn-group > .btn:first-child {
+    @apply md:rounded-l
+}
+
+.btn-group > .btn:last-child {
+    @apply md:rounded-r md:border-r
 }
 
 .header {
@@ -167,15 +195,21 @@ body {
 
 
 .ctable-cell {
-    @apply p-1
+    @apply p-1 h-full
 }
-
+.ctable-cell.tall {
+    @apply py-12
+}
 .ctable-cell.wide {
     @apply w-full pr-2
 }
 
 .ctable-row {
     @apply border-b border-gray-200 dark:border-dt-800
+}
+
+.pin {
+    @apply top-0 bottom-0 left-0 right-0
 }
 
 ::-webkit-input-placeholder {

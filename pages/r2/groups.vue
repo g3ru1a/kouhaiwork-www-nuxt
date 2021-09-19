@@ -1,6 +1,7 @@
 <template>
     <div class=" dark:bg-dt-100">
         <div class="resp-container">
+            <h1 class="page-title">Groups</h1>
             <div class="w-full flex flex-col xl:flex-row xl:space-x-2 xl:items-stretch">
                 <r2-your-groups ref="groups" v-on:edit="openEdit($event)"></r2-your-groups>
                 <transition name="fade">

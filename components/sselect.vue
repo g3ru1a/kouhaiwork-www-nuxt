@@ -8,14 +8,14 @@
 				focusedInp ? (open = true) : (open = !open);
 				if (!open) search = '';
 			"
-			class="p-3 w-full bg-white shadow flex justify-between cursor-pointer rounded dark:bg-dt-300"
+			class="p-3 w-full bg-white shadow flex justify-between cursor-pointer rounded dark:bg-dt-700"
 		>
 			<input
 				ref="search"
 				v-model="search"
 				v-show="open"
 				type="text"
-				class="w-full h-full focus:outline-none dark:bg-dt-300"
+				class="w-full h-full focus:outline-none dark:bg-dt-700"
 				:placeholder="`Search for ${title}`"
 				@focus="focusedInp = true"
 				@blur="focusedInp = false"
@@ -142,7 +142,8 @@ export default {
 		multiple: {
 			type: Boolean,
 			default: false
-		}
+		},
+		preselection: Object | Array
 	},
 	data() {
 		return {
@@ -152,6 +153,21 @@ export default {
 			focusedInp: false,
 			search: ""
 		};
+	},
+	mounted(){
+		console.log(this.preselection);
+		if(this.preselection != undefined){
+			if(Array.isArray(this.preselection)){
+				for(let i = 0; i < this.preselection.length; i++){
+					let opt = this.options.find(e => e.id == this.preselection[i]);
+					this.select(opt);
+				}
+			}else{
+				this.select(this.options.find(e => e.id == this.preselection));
+				console.log('seleeect');
+			}
+				this.open = false;
+		}
 	},
 	methods: {
 		select(opt) {

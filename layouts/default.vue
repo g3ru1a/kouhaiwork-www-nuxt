@@ -1,5 +1,5 @@
 <template>
-<div class="dark">
+<div :class="{'dark': $store.state.dark_theme}">
 	<div class="relative min-h-screen font-poppins overflow-x-hidden dark:bg-dt-100" :class="{'flex': !$device.isMobileOrTablet && nav_open}">
         <tailwindhelper></tailwindhelper>
 		<TopNav :open="nav_open" v-on:toggle_nav="toggleNav()"></TopNav>

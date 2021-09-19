@@ -3,6 +3,7 @@ export const state = () => ({
 	token: null,
 	authenticated: false,
 	reader_settings: null,
+	dark_theme: false
 });
 
 export const mutations = {
@@ -18,6 +19,9 @@ export const mutations = {
 	setReaderSettings(state, settings) {
 		state.reader_settings = settings;
 	},
+	toggleDarkTheme(state) {
+		state.dark_theme = !state.dark_theme;
+	}
 };
 
 export const getters = {

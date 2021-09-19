@@ -1,6 +1,6 @@
 <template>
 	<div class="h-screen flex items-center justify-center">
-		<div class="panel panel-shadow panel-compact panel-white">
+		<form @submit.prevent="login" class="panel panel-shadow panel-compact panel-white">
 			<h1 class="panel-title">Login</h1>
 			<error-bubble v-show="error != ''" :text="error"></error-bubble>
 			<div class="form-group">
@@ -27,7 +27,7 @@
 				Submit
 			</button>
             <nuxt-link class="link" to="/forgotpassword">Forgot your Password?</nuxt-link>
-		</div>
+		</form>
 	</div>
 </template>
 
