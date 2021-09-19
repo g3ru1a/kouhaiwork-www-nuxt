@@ -77,7 +77,7 @@ export default {
 	@apply w-36 lg:w-48 h-64 object-cover rounded-l
 }
 .result-info {
-    @apply flex flex-col h-64 
+    @apply w-full flex flex-col h-64 
 }
 .result-info-inner {
 	@apply p-3 flex-1 flex flex-col items-start justify-start overflow-y-scroll z-10;

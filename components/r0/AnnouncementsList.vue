@@ -6,7 +6,7 @@
 					{{ ann.title }}
 				</h1>
 				<span
-					v-if="$store.getters.isRank3"
+					v-show="$store.getters.isRank3"
 					@click="deletePost(ann.id)"
 					class="tag tag-red float-right">
 					Delete
