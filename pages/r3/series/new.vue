@@ -10,7 +10,7 @@
                 </div>
                 <div class="form-group">
                     <error-bubble v-if="error.synopsis" :text="error.synopsis[0]"></error-bubble>
-                    <textarea v-model="info.synopsis" type="text" class="form-input" placeholder="Series Name..."></textarea>
+                    <textarea v-model="info.synopsis" type="text" class="form-input" placeholder="Series Synopsis..."></textarea>
                 </div>
                 <div class="form-group">
                     <error-bubble v-if="error.status" :text="error.status[0]"></error-bubble>
@@ -136,6 +136,7 @@
 
 <script>
 export default {
+    middleware: ['auth'],
     data() {
         return {
             uploading: false,

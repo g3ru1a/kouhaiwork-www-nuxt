@@ -50,7 +50,13 @@ export default {
 
 	// Auto import components: https://go.nuxtjs.dev/config-components
 	components: {
-		dirs: ["~/components", "~/components/dev", "~/components/r0"]
+		dirs: [
+			"~/components",
+			"~/components/dev",
+			"~/components/r0",
+			"~/components/r2",
+			"~/components/r3"
+		]
 	},
 
 	// Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules

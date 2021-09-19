@@ -73,7 +73,7 @@
 				class="px-4 py-2 text-gray-800 dark:text-white text-left italic"
 				v-if="filteredOptions.length == 0"
 			>
-				No genres match '{{ search }}'
+				No {{title.toLowerCase()}} match '{{ search }}'
 			</p>
 
 			<button
@@ -103,7 +103,7 @@
 			</button>
 		</div>
 
-		<div v-show="open" class="absolute tag-container-centered mt-44 z-50">
+		<div v-if="multiple" v-show="open" class="absolute tag-container-centered mt-44 z-50">
 			<div
 				v-show="search == '' && multiple"
 				v-for="opt in selection"

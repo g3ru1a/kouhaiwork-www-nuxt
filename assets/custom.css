@@ -41,7 +41,7 @@ body {
 }
 
 .panel {
-    @apply mb-4 p-4 mx-2 md:mx-0
+    @apply mb-4 p-4 mx-2 md:mx-0 rounded shadow
 }
 
 .panel-shadow {
@@ -163,11 +163,24 @@ body {
 .form-group-inline-nm > .form-input {
     @apply rounded-l rounded-r-none
 }
+.form-group-inline > input[type="number"]{
+    @apply rounded-none
+}
+.form-group-inline > input[type="number"]:first-child{
+    @apply rounded-l rounded-r-none
+}
+.form-group-inline > input[type="number"]:last-child{
+    @apply rounded-r rounded-l-none
+}
 
 .btn-group {
     @apply flex flex-col md:flex-row
 }
-.btn-group > .btn {
+.btn-group-rev {
+    @apply flex flex-col md:flex-row-reverse
+}
+.btn-group > .btn,
+.btn-group-rev > .btn {
     @apply m-1 md:rounded-none md:m-0 md:border-r-0
 }
 .btn-group > .btn:first-child {
@@ -176,6 +189,13 @@ body {
 
 .btn-group > .btn:last-child {
     @apply md:rounded-r md:border-r
+}
+.btn-group-rev > .btn:first-child {
+    @apply md:rounded-r
+}
+
+.btn-group-rev > .btn:last-child {
+    @apply md:rounded-l md:border-r
 }
 
 .header {

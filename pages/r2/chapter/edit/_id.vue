@@ -1,8 +1,8 @@
 <template>
     <div>
         <div class="resp-container">
-            <h1 class="page-title">Upload Chapters</h1>
-            <upload-chapter></upload-chapter>
+            <h1 class="page-title">Edit Chapter</h1>
+            <edit-chapter></edit-chapter>
             <upload-guidelines></upload-guidelines>
         </div>
     </div>

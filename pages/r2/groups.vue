@@ -3,9 +3,9 @@
         <div class="resp-container">
             <h1 class="page-title">Groups</h1>
             <div class="w-full flex flex-col xl:flex-row xl:space-x-2 xl:items-stretch">
-                <r2-your-groups ref="groups" v-on:edit="openEdit($event)"></r2-your-groups>
+                <your-groups ref="groups" v-on:edit="openEdit($event)"></your-groups>
                 <transition name="fade">
-                    <r2-group-edit v-if="showEdit" :group="editInfo" v-on:edit="editSync($event)" v-on:delete="closeEdit"></r2-group-edit>
+                    <group-edit v-if="showEdit" :group="editInfo" v-on:edit="editSync($event)" v-on:delete="closeEdit"></group-edit>
                 </transition>
             </div>
         </div>
