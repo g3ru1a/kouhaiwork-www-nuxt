@@ -48,7 +48,7 @@ export default {
 					next = response.data.next_id;
 					prev = response.data.prev_id;
 				})
-				.catch(err => alert(err));
+				.catch(err => console.log(err));
 		return {chapter: ch, next_id: next, prev_id: prev};
 	},
 	mounted() {
