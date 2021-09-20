@@ -8,7 +8,7 @@
 				<span
 					v-show="$store.getters.isRank3"
 					@click="deletePost(ann.id)"
-					class="tag tag-red float-right">
+					class="tag tag-red float-right cursor-pointer">
 					Delete
 				</span>
 			</div>

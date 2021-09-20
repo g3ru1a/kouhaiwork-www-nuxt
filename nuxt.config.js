@@ -69,7 +69,7 @@ export default {
 	modules: ["@nuxtjs/axios"],
 
 	axios: {
-		baseURL: "https://bapi.kouhai.work/api/"
+		baseURL: "https://api.kouhai.work/api/"
 		// baseURL: "http://localhost:8000/api/"
 	},
 
