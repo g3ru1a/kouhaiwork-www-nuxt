@@ -43,6 +43,7 @@ export default {
                 case 'ltr': newDir = 'rtl'; break;
                 case 'rtl': newDir = 'ver'; break;
                 case 'ver': newDir = 'ltr'; break;
+                default: newDir = 'ltr'; break;
             }
             this.updateSettings({
                 direction: newDir,
