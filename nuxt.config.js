@@ -74,8 +74,8 @@ export default {
 	modules: ["@nuxtjs/axios"],
 
 	axios: {
-		// baseURL: "https://api.kouhai.work/api/"
-		baseURL: "http://localhost:8000/api/"
+		baseURL: "https://api.kouhai.work/api/"
+		// baseURL: "http://localhost:8000/api/"
 	},
 
 	// Build Configuration: https://go.nuxtjs.dev/config-build
