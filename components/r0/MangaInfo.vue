@@ -103,7 +103,7 @@
                     </p>
                 </div>
             </template>
-            <template v-if="info.alternative_titles.length > 0">
+            <template v-if="info.alternative_titles && info.alternative_titles.length > 0">
                 <h2 class="header">Alternative Names</h2>
                 <div class="flex flex-col w-full text-left">
                     <h2

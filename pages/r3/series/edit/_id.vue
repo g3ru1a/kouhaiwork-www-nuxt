@@ -115,6 +115,16 @@
                 <div class="form-group">
                     <button @click="updateSeries" class="btn btn-block btn-theme">Update</button>
                 </div>
+                <div class="form-group">
+                    <button @click="deleteSeries" v-show="!deletePrompt" class="btn btn-block btn-red">Delete</button>
+                    <div v-show="deletePrompt">
+                        <p class="mb-2 text-center">Are you sure you want to delete the chapter?</p>
+                        <div class="btn-group noborder">
+                            <button @click="deleteSeries" class="btn btn-block btn-red">Delete</button>
+                            <button @click="deletePrompt = false" class="btn btn-block btn-theme">FUCK! GO BACK!</button>
+                        </div>
+                    </div>
+                </div>
                 <div class="form-group text-center italic">
                     <p>Make sure to double check all the information</p>
                 </div>
@@ -175,12 +185,36 @@ export default {
             coverPreview: null,
             uploadPerc: 50,
             error: '',
+			deletePrompt: false,
         }
     },
     mounted() {
         this.loadMangaInfo()
     },
     methods: {
+        deleteSeries() {
+			if(!this.deletePrompt) {
+				this.deletePrompt = true;
+				return;
+			}
+            this.uploading = true;
+			this.$axios.delete('/mangas/'+this.$route.params.id, {}, {
+				onUploadProgress: event => {
+                    this.uploadPerc = Math.round(
+                        (event.loaded * 100) / event.total
+                    );
+                },
+			})
+			.then((response)=>{
+                console.log(response);
+            	this.uploading = false;
+                this.$router.push('/r3/series/');
+			})
+			.catch(err => {
+            	this.uploading = false;
+				console.log(err);
+			});
+		},
         updateSeries(){
             this.uploading = true;
             this.success = false;
@@ -257,7 +291,10 @@ export default {
                     this.coverPreview = resp.data.cover.url;
                     this.loaded = true;
                 })
-				.catch(err => console.log(err.response));
+				.catch(err => {
+                    console.log(err.response);
+                    this.$router.push('/r3/series/');
+                });
         },
         addTitle(){
             if(this.addTitleInput == '') return;
