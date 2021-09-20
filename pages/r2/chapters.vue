@@ -73,18 +73,18 @@
 				</p>
 			</div>
             <div v-show="results && results.length > 0" class="">
-            <div v-for="res in results" :key="res.id" @click="select(res)" class="panel panel-white result">
-                <img class="h-24" :src="res.manga.cover.url" alt="" />
-                <div class="px-2 flex flex-col items-start justify-center">
-                    <p class="text-xl">
-                        Chapter {{ res.number }} <span v-if="res.name">- {{ res.name }}</span>
-                    </p>
-                    <p class="text-lg" v-if="res.volume">Volume {{ res.volume }}</p>
-                    <p class="font-light italic">{{ res.manga.title }}</p>
-                    <p>{{ res.pages_count }} Pages</p>
-                </div>
-            </div>
-        </div>
+				<div v-for="res in results" :key="res.id" @click="select(res)" class="panel panel-white result">
+					<img class="h-24 w-16 object-cover" :src="(res.manga !== null) ? res.manga.cover.url : '/img-place.jpg'" alt="" />
+					<div class="px-2 flex flex-col items-start justify-center">
+						<p class="text-xl">
+							Chapter {{ res.number }} <span v-if="res.name">- {{ res.name }}</span>
+						</p>
+						<p class="text-lg" v-if="res.volume">Volume {{ res.volume }}</p>
+						<p class="font-light italic">{{ (res.manga !== null) ? res.manga.title : 'Series missing' }}</p>
+						<p>{{ res.pages_count }} Pages</p>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </template>
