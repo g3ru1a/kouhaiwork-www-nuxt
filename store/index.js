@@ -2,9 +2,13 @@ export const state = () => ({
 	user: null,
 	token: null,
 	authenticated: false,
-	reader_settings: null,
+	reader_settings: {
+		dark: false,
+		direction: "ltr",
+		vertical_padding: false
+	},
 	dark_theme: false,
-	vert_reader_drawer_open: false,
+	vert_reader_drawer_open: false
 });
 
 export const mutations = {
@@ -23,7 +27,7 @@ export const mutations = {
 	toggleDarkTheme(state) {
 		state.dark_theme = !state.dark_theme;
 	},
-	setVertReaderDrawer(state, open){
+	setVertReaderDrawer(state, open) {
 		state.vert_reader_drawer_open = open;
 	}
 };
@@ -47,7 +51,7 @@ export const actions = {
 		commit("setUser", null);
 		commit("setAuthenticated", false);
 	},
-	setReaderSettingsA({commit}, settings){
+	setReaderSettingsA({ commit }, settings) {
 		commit("setReaderSettings", settings);
 	}
 };
