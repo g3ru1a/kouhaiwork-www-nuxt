@@ -71,7 +71,10 @@ export default {
             })
 		},
 		...mapMutations(["setUser", "setToken", "setAuthenticated"])
-	}
+	},
+    head: {
+		title: 'Login | Kouhai Work', 
+    }
 };
 </script>
 

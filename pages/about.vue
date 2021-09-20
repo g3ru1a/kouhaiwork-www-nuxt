@@ -63,6 +63,9 @@
 export default {
 	setup() {
 		//
-	}
+	},
+    head: {
+		title: 'About | Kouhai Work', 
+    }
 };
 </script>

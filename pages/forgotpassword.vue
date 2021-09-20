@@ -58,6 +58,9 @@ export default {
 					if (err.message) this.error = err.message;
 				});
 		}
-	}
+	},
+    head: {
+		title: 'Forgot Password | Kouhai Work', 
+    }
 };
 </script>

@@ -13,6 +13,9 @@ export default {
 	data() {
 		return {
 		};
-	}
+	},
+    head: {
+		title: 'Announcements | Kouhai Work', 
+    }
 };
 </script>

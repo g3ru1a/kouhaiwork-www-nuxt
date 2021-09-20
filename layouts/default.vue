@@ -78,7 +78,7 @@ export default {
 				hid: "description",
 				name: "description",
 				content:
-					"A place to read scans from Kouhai Scans and other groups."
+					"The site made by a scans group for the scans groups, offering ad-free user experience and easy-to-use interface."
 			},
 			{
                 hid: 'og-title',
@@ -89,7 +89,7 @@ export default {
                 hid: 'og-description',
 				property: "og:description",
 				content:
-					"A place to read scans from Kouhai Scans and other groups."
+					"The site made by a scans group for the scans groups, offering ad-free user experience and easy-to-use interface."
 			},
 			{
                 hid: 'og-image',

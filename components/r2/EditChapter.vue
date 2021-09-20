@@ -106,7 +106,7 @@
 					<p class="mb-2 text-center">Are you sure you want to delete the chapter?</p>
 					<div class="btn-group noborder">
 						<button @click="deleteChapter" class="btn btn-block btn-red">Delete</button>
-						<button @click="deletePrompt = false" class="btn btn-block btn-theme">Didn't mean to do that</button>
+						<button @click="deletePrompt = false" class="btn btn-block btn-theme">FUCK! GO BACK!</button>
 					</div>
 				</div>
 			</div>

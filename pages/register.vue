@@ -98,7 +98,10 @@ export default {
 					if (err.message) this.error += err.message + "<br>";
 				});
 		}
-	}
+	},
+    head: {
+		title: 'Register | Kouhai Work', 
+    }
 };
 </script>
 
