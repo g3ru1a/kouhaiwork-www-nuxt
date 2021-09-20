@@ -33,14 +33,26 @@ export default {
 	//ver = vertical
 	data() {
 		return {
-			chapter: null,
-			next_id: null,
-			prev_id: null,
+			// chapter: null,
+			// next_id: null,
+			// prev_id: null,
 			settings: null
 		};
 	},
+	async asyncData(context) {
+		let ch, next, prev;
+		await context.$axios
+				.get("/chapters/" + Number(context.params.id))
+				.then(response => {
+					ch = response.data.chapter;
+					next = response.data.next_id;
+					prev = response.data.prev_id;
+				})
+				.catch(err => alert(err));
+		return {chapter: ch, next_id: next, prev_id: prev};
+	},
 	mounted() {
-		this.loadPages();
+		// this.loadPages();
 		console.log(this.$store.state.reader_settings);
 		this.settings = this.$store.state.reader_settings;
 		if (this.settings == null || this.settings == undefined) {
@@ -66,6 +78,38 @@ export default {
 		updateSettings(newSettings) {
 			this.settings = newSettings;
 			this.$store.commit('setReaderSettings', this.settings);
+		}
+	},
+	head(){
+		return {
+			title: 'Chapter '+this.chapter.number +' | '+this.chapter.manga.title,
+            meta:  [
+                {
+                    hid: 'description',
+                    name: 'description',
+                    content: `${this.chapter.manga.title} chapter ${this.chapter.number} ${(this.chapter.name) ? this.chapter.name : ''}`
+                },
+                {
+                    hid: 'og-title',
+                    property: 'og:title',
+                    content: 'Chapter '+this.chapter.number +' | '+this.chapter.manga.title
+                },
+                {
+                    hid: 'og-description',
+                    property: 'og:description',
+                    content: `${this.chapter.manga.title} chapter ${this.chapter.number} ${(this.chapter.name) ? this.chapter.name : ''}`
+                },
+                {
+                    hid: 'og-image',
+                    property: 'og:image',
+                    content: this.chapter.manga.cover.url
+                },
+                {
+                    hid: 'og-url',
+                    property: 'og:url',
+                    content: 'https://kouhai.work'+this.$route.path
+                }
+            ]
 		}
 	}
 };

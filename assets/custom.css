@@ -198,6 +198,10 @@ body {
     @apply md:rounded-l md:border-r
 }
 
+.btn-group.noborder > .btn {
+    @apply border-none
+}
+
 .header {
     @apply mb-2 font-semibold text-lg
 }

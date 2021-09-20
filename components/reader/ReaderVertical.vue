@@ -10,7 +10,7 @@
             </div>
 		</div>
         <div id="vert-settings" class="flex fixed top-1/2 right-0 transform-all duration-150">
-            <button @click="open = !open" class="bg-theme-dark text-white rounded-l-lg" :class="[open?'opacity-100':'opacity-50']">
+            <button @click="toggleOpen(false)" class="bg-theme-dark text-white rounded-l-lg" :class="[open?'opacity-100':'opacity-50']">
                 <svg v-if="!open" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                 </svg>
@@ -43,13 +43,21 @@ export default {
 	},
     mounted() {
         this.carryVert();
+        this.open = this.$store.state.vert_reader_drawer_open;
     },
 	methods: {
 		carryVert(event) {
 			let st = window.pageYOffset || document.documentElement.scrollTop;
+            let scrollMaxY = window.scrollMaxY || (document.documentElement.scrollHeight - document.documentElement.clientHeight);
             document.querySelector("#vert-settings").style.top = st + (window.innerHeight - 200) + 'px';
-			
+			if(st >= scrollMaxY) this.toggleOpen(true);
 		},
+        toggleOpen(forceOpen = false){
+            if(forceOpen) {
+                this.open = true;
+            }else this.open = !this.open;
+            this.$store.commit('setVertReaderDrawer', this.open);
+        },
         nextChap(){
             this.$router.push("/read/" + this.next_id);
         },

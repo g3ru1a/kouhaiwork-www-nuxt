@@ -22,18 +22,50 @@
 export default {
 	data() {
 		return {
-			info: null,
+			// info: null,
 			show_chapters: true
 		};
 	},
-	beforeMount() {
-		this.loadInfo();
+    mounted() {
+        console.log(this.$route.path);
+    },
+	async asyncData(context) {
+        let inf = null;
+        await context.$axios
+			.get("/mangas/" + Number(context.params.id))
+			.then(resp => (inf = resp.data));
+        return {info: inf};
 	},
-	methods: {
-		loadInfo() {
-			this.$axios
-				.get("/mangas/" + Number(this.$route.params.id))
-				.then(resp => (this.info = resp.data));
+	head(){
+		return {
+			title: this.info.title,
+            meta:  [
+                {
+                    hid: 'description',
+                    name: 'description',
+                    content: this.info.synopsis
+                },
+                {
+                    hid: 'og-title',
+                    property: 'og:title',
+                    content: this.info.title
+                },
+                {
+                    hid: 'og-description',
+                    property: 'og:description',
+                    content: this.info.synopsis
+                },
+                {
+                    hid: 'og-image',
+                    property: 'og:image',
+                    content: this.info.cover.url
+                },
+                {
+                    hid: 'og-url',
+                    property: 'og:url',
+                    content: 'https://kouhai.work'+this.$route.path
+                }
+            ]
 		}
 	}
 };

@@ -3,7 +3,8 @@ export const state = () => ({
 	token: null,
 	authenticated: false,
 	reader_settings: null,
-	dark_theme: false
+	dark_theme: false,
+	vert_reader_drawer_open: false,
 });
 
 export const mutations = {
@@ -21,6 +22,9 @@ export const mutations = {
 	},
 	toggleDarkTheme(state) {
 		state.dark_theme = !state.dark_theme;
+	},
+	setVertReaderDrawer(state, open){
+		state.vert_reader_drawer_open = open;
 	}
 };
 

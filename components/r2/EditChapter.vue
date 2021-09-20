@@ -100,6 +100,16 @@
 					Update
 				</button>
 			</div>
+			<div class="form-group">
+				<button @click="deleteChapter" v-show="!deletePrompt" class="btn btn-block btn-red">Delete</button>
+				<div v-show="deletePrompt">
+					<p class="mb-2 text-center">Are you sure you want to delete the chapter?</p>
+					<div class="btn-group noborder">
+						<button @click="deleteChapter" class="btn btn-block btn-red">Delete</button>
+						<button @click="deletePrompt = false" class="btn btn-block btn-theme">Didn't mean to do that</button>
+					</div>
+				</div>
+			</div>
 		</div>
 		<div
 			v-if="uploading"
@@ -180,6 +190,7 @@ export default {
             uploadPerc: 50,
             errors: {},
             info: null,
+			deletePrompt: false,
 		};
 	},
 	async mounted() {
@@ -189,6 +200,28 @@ export default {
         this.volume = this.info.volume;
 	},
 	methods: {
+		deleteChapter() {
+			if(!this.deletePrompt) {
+				this.deletePrompt = true;
+				return;
+			}
+            this.uploading = true;
+			this.$axios.delete('/mangas/'+this.$route.params.id, {}, {
+				onUploadProgress: event => {
+                    this.uploadPerc = Math.round(
+                        (event.loaded * 100) / event.total
+                    );
+                },
+			})
+			.then(()=>{
+            	this.uploading = false;
+                this.$router.push('/r2/chapters/');
+			})
+			.catch(err => {
+            	this.uploading = false;
+				console.log(err);
+			});
+		},
 		update(keep) {
             this.uploading = true;
             this.success = false;

@@ -18,6 +18,8 @@
             <nuxt-link class="sidenav-link" to="/search">Search Series</nuxt-link>
             <h2 class="sidenav-header">Kouhai Work</h2>
             <nuxt-link class="sidenav-link" to="/announcements">Announcements</nuxt-link>
+            <nuxt-link class="sidenav-link" to="/about">About Us</nuxt-link>
+            <a class="sidenav-link" href="https://discord.gg/2deN4x7rUw" target="blank">Discord</a>
             <template v-if="$store.getters.isRank2">
                 <h2 class="sidenav-header">Groups</h2>
                 <nuxt-link class="sidenav-link" to="/r2/upload">Upload</nuxt-link>

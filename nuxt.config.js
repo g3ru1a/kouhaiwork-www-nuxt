@@ -11,8 +11,7 @@ export default {
 				name: "viewport",
 				content: "width=device-width, initial-scale=1"
 			},
-			{ hid: "description", name: "description", content: "" },
-			{ name: "format-detection", content: "telephone=no" }
+			{ name: "format-detection", content: "telephone=no" },
 		],
 		link: [
 			{ rel: "icon", type: "image/png", href: "/logo_crp.png" },
@@ -70,11 +69,10 @@ export default {
 	modules: ["@nuxtjs/axios"],
 
 	axios: {
-		baseURL: "https://bapi.kouhai.work/api/",
-		// baseURL: "http://localhost:8000/api/"
+		// baseURL: "https://bapi.kouhai.work/api/"
+		baseURL: "http://localhost:8000/api/"
 	},
 
 	// Build Configuration: https://go.nuxtjs.dev/config-build
-	build: {},
-
+	build: {}
 };
