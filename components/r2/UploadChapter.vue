@@ -160,7 +160,7 @@
 							</circle>
 						</svg>
 						<p class="mx-1 py-1 dark:text-white">
-							Uploading Series {{ uploadPerc }}%
+							Uploading Chapter {{ uploadPerc }}%
 						</p>
 					</div>
 				</div>
