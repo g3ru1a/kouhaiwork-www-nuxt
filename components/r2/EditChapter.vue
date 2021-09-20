@@ -157,13 +157,13 @@
 							</circle>
 						</svg>
 						<p class="mx-1 py-1 dark:text-white">
-							Uploading Series {{ uploadPerc }}%
+							Updating Chapter {{ uploadPerc }}%
 						</p>
 					</div>
 				</div>
 			</div>
 			<p v-if="success" class="text-base">
-				Upload Complete! Redirecting...
+				Update Complete! Redirecting...
 			</p>
 		</div>
 	</div>
@@ -206,7 +206,7 @@ export default {
 				return;
 			}
             this.uploading = true;
-			this.$axios.delete('/mangas/'+this.$route.params.id, {}, {
+			this.$axios.delete('/chapter/delete/'+this.$route.params.id, {}, {
 				onUploadProgress: event => {
                     this.uploadPerc = Math.round(
                         (event.loaded * 100) / event.total
