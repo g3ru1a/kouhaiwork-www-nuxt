@@ -46,5 +46,8 @@ export const actions = {
 		commit("setToken", null);
 		commit("setUser", null);
 		commit("setAuthenticated", false);
+	},
+	setReaderSettingsA({commit}, settings){
+		commit("setReaderSettings", settings);
 	}
 };

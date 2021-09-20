@@ -54,14 +54,18 @@ export default {
 	mounted() {
 		// this.loadPages();
 		console.log(this.$store.state.reader_settings);
-		this.settings = this.$store.state.reader_settings;
+		this.settings = {...this.$store.state.reader_settings};
 		if (this.settings == null || this.settings == undefined) {
 			this.settings = {
-				dark: false,
+				dark: this.$store.state.dark_theme,
 				direction: "ltr",
 				vertical_padding: false
 			};
-			this.$store.commit('setReaderSettings', this.settings);
+			this.$store.dispatch('setReaderSettingsA', {...this.settings});
+		}
+		if(this.$store.state.dark_theme) {
+			this.settings.dark = true;
+			this.$store.dispatch('setReaderSettingsA', {...this.settings});
 		}
 	},
 	methods: {
@@ -77,7 +81,7 @@ export default {
 		},
 		updateSettings(newSettings) {
 			this.settings = newSettings;
-			this.$store.commit('setReaderSettings', this.settings);
+			this.$store.dispatch('setReaderSettingsA', {...this.settings});
 		}
 	},
 	head(){

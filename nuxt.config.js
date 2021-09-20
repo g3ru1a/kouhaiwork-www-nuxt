@@ -11,7 +11,7 @@ export default {
 				name: "viewport",
 				content: "width=device-width, initial-scale=1"
 			},
-			{ name: "format-detection", content: "telephone=no" },
+			{ name: "format-detection", content: "telephone=no" }
 		],
 		link: [
 			{ rel: "icon", type: "image/png", href: "/logo_crp.png" },
@@ -62,15 +62,20 @@ export default {
 	buildModules: [
 		// https://go.nuxtjs.dev/tailwindcss
 		"@nuxtjs/tailwindcss",
-		"@nuxtjs/device"
+		"@nuxtjs/device",
+		"@nuxtjs/google-analytics"
 	],
+
+	googleAnalytics: {
+		id: "G-SX1SY7E2RS"
+	},
 
 	// Modules: https://go.nuxtjs.dev/config-modules
 	modules: ["@nuxtjs/axios"],
 
 	axios: {
-		baseURL: "https://api.kouhai.work/api/"
-		// baseURL: "http://localhost:8000/api/"
+		// baseURL: "https://api.kouhai.work/api/"
+		baseURL: "http://localhost:8000/api/"
 	},
 
 	// Build Configuration: https://go.nuxtjs.dev/config-build
