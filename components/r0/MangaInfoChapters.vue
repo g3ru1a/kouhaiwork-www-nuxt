@@ -10,6 +10,7 @@
                     class="chapter-inner"
                     @click="$router.push('/read/'+chap.id)"
                 >
+                    <p class="italic text-sm text-gray-600 dark:text-gray-200">{{prettyDate(chap.updated_at)}}</p>
                     <h2 class="number">
                         <span v-if="chap.volume" class="volume"
                             >[Vol. {{ chap.volume }}]</span
@@ -29,7 +30,19 @@
 
 <script>
 export default {
-	props: ["info"]
+	props: ["info"],
+    methods: {
+		prettyDate(uglyDate) {
+			let date = new Date(uglyDate);
+			let options = {
+				weekday: "long",
+				year: "numeric",
+				month: "long",
+				day: "numeric"
+			};
+			return date.toLocaleString("en-US", options);
+		},
+    }
 };
 </script>
 
