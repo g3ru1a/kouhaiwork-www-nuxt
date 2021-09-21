@@ -39,7 +39,7 @@ export default {
         nextPage(skip = false){
             console.log(skip);
             if(this.currentPage === this.chapter.pages.length - 1 && this.next_id !== null){
-                this.$router.push("/read/" + this.next_id);
+                window.location = "/read/" + this.next_id + '?keep_scroll=true';
                 return;
             }
             let ind = this.currentPage < this.chapter.pages.length - 1 ? this.currentPage + 1 : this.chapter.pages.length -1;
@@ -50,7 +50,7 @@ export default {
         prevPage(skip = false){
             console.log(skip);
             if(this.currentPage === 0 && this.prev_id !== null){
-                this.$router.push("/read/" + this.prev_id);
+                window.location = "/read/" + this.prev_id + '?keep_scroll=true';
                 return;
             }
             let ind = this.currentPage > 0 ? this.currentPage - 1 : 0;

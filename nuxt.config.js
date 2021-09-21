@@ -91,8 +91,13 @@ export default {
 	modules: ["@nuxtjs/axios"],
 
 	axios: {
-		baseURL: "https://api.kouhai.work/api/"
+		baseURL: process.env.APP_API_URL || "https://api.kouhai.work/api/"
 		// baseURL: "http://localhost:8000/api/"
+	},
+
+	env: {
+		apiURL: process.env.APP_API_URL || "https://api.kouhai.work/api/",
+		appVersion: process.env.APP_VERSION || "2.0.0"
 	},
 
 	// Build Configuration: https://go.nuxtjs.dev/config-build

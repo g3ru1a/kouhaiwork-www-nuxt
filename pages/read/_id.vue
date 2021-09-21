@@ -10,14 +10,14 @@
 			v-on:update-settings="updateSettings($event)"
 		></reader-settings>
 		<reader-pages
-			v-if="settings.direction != 'ver'"
+			v-show="settings.direction != 'ver'"
 			:chapter="chapter"
 			:next_id="next_id"
 			:prev_id="prev_id"
 			:settings="settings"
 		></reader-pages>
 		<reader-vertical
-			v-if="settings.direction == 'ver'"
+			v-show="settings.direction == 'ver'"
 			:chapter="chapter"
 			:settings="settings"
 			:next_id="next_id"
@@ -53,7 +53,6 @@ export default {
 	},
 	mounted() {
 		// this.loadPages();
-		console.log(this.$store.state.reader_settings);
 		this.settings = {...this.$store.state.reader_settings};
 		if (this.settings == null || this.settings == undefined) {
 			this.settings = {

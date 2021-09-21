@@ -2,14 +2,14 @@
     <div class="sidenav nobar" 
         :class="{'closed': !open}">
         
-        <nuxt-link to="/" class="relative">
+        <div @click="$router.push('/')" class="relative cursor-pointer">
             <img class="sidenav-logo" src="/logo.png" alt="">
             <p @click="$emit('toggle_nav')" class="absolute top-0 right-0 p-4">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </p>
-        </nuxt-link>
+        </div>
         <p class="sidenav-brand">Kouhai.Work</p>
         <client-only>
         <nav class="sidenav-links">
@@ -46,6 +46,10 @@
                 <nuxt-link class="sidenav-link" to="/register">Register</nuxt-link>
             </template>
         </nav>
+        <div class="px-8 w-full flex-1 flex flex-col items-start justify-end text-center font-semibold">
+            <p>Version {{version}}</p>
+            <h2 class="text-lg">Kouhai.Work &copy; 2021</h2>
+        </div>
         </client-only>
     </div>
 </template>
@@ -55,6 +59,11 @@ export default {
     props: {
         open: Boolean,
     },
+    data(){
+        return {
+            version: process.env.appVersion
+        }
+    }
 }
 </script>
 
@@ -66,7 +75,7 @@ export default {
     @apply mb-4 text-xl text-center font-semibold uppercase
 }
 .sidenav-links {
-    @apply w-full flex flex-col text-lg 
+    @apply w-full  flex flex-col text-lg 
 }
 .sidenav-link {
     @apply px-8 py-1.5 transition-all duration-150 transform
@@ -83,7 +92,7 @@ a.nuxt-link-exact-active  {
 }
 
 .sidenav {
-    @apply pb-8 fixed w-60 md:w-80 h-screen bg-gray-700 text-white transition-all duration-150 transform z-70;
+    @apply flex flex-col pb-8 fixed w-60 md:w-80 h-screen bg-gray-700 text-white transition-all duration-150 transform z-70;
     @apply max-h-screen overflow-y-auto overflow-x-hidden;
     @apply dark:bg-dt-200
 }
