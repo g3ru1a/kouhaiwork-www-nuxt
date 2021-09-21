@@ -10,6 +10,8 @@ export const state = () => ({
 	dark_theme: false,
 	vert_reader_drawer_open: false,
 	sidebar_open: false,
+	use_cookies: false,
+	acknowledged_cookies: false,
 });
 
 export const mutations = {
@@ -33,6 +35,12 @@ export const mutations = {
 	},
 	setSideBarOpen(state, open){
 		state.sidebar_open = open;
+	},
+	setUseCookies(state, use){
+		state.use_cookies = use;
+	},
+	setAcknowledgedCookies(state, ack){
+		state.acknowledged_cookies = ack;
 	}
 };
 

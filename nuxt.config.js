@@ -26,22 +26,6 @@ export default {
 				href:
 					"https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
 			}
-		],
-		script: [
-			{
-				src: "https://www.googletagmanager.com/gtag/js?id=G-SX1SY7E2RS",
-				async: true
-			},
-			{
-				type: "text/javascript",
-				hid: "ga",
-				innerHTML: `
-				window.dataLayer = window.dataLayer || [];
-				function gtag(){dataLayer.push(arguments);}
-				gtag('js', new Date());
-
-				gtag('config', 'G-SX1SY7E2RS');`
-			}
 		]
 	},
 
@@ -60,6 +44,7 @@ export default {
 	plugins: [
 		{ src: "~plugins/nuxt-quill-plugin", ssr: false },
 		{ src: "~plugins/vuex-persist.js", ssr: false },
+		{ src: "~plugins/gtm.js", ssr: false },
 		"~/plugins/axios",
 		"~/plugins/directives"
 	],
@@ -79,13 +64,15 @@ export default {
 	buildModules: [
 		// https://go.nuxtjs.dev/tailwindcss
 		"@nuxtjs/tailwindcss",
-		"@nuxtjs/device"
-		// "@nuxtjs/google-analytics"
+		"@nuxtjs/device",
+		"@nuxtjs/gtm"
 	],
 
-	// googleAnalytics: {
-	// 	id: "G-SX1SY7E2RS"
-	// },
+	gtm: {
+		id: "GTM-T95BGV2",
+		enabled: true,
+		autoInit: false
+	},
 
 	// Modules: https://go.nuxtjs.dev/config-modules
 	modules: ["@nuxtjs/axios"],
@@ -97,7 +84,8 @@ export default {
 
 	env: {
 		apiURL: process.env.APP_API_URL || "https://api.kouhai.work/api/",
-		appVersion: process.env.APP_VERSION || "2.0.0"
+		appVersion: process.env.APP_VERSION || "2.0.0",
+		gtmID: process.env.GTM_ID || "111"
 	},
 
 	// Build Configuration: https://go.nuxtjs.dev/config-build
