@@ -1,7 +1,7 @@
 export default {
 	// Global page headers: https://go.nuxtjs.dev/config-head
 	head: {
-		__dangerouslyDisableSanitizers: ['script'],
+		__dangerouslyDisableSanitizers: ["script"],
 		title: "Kouhai Work",
 		htmlAttrs: {
 			lang: "en"
@@ -79,7 +79,7 @@ export default {
 	buildModules: [
 		// https://go.nuxtjs.dev/tailwindcss
 		"@nuxtjs/tailwindcss",
-		"@nuxtjs/device",
+		"@nuxtjs/device"
 		// "@nuxtjs/google-analytics"
 	],
 

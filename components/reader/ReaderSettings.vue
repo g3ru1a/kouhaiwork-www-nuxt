@@ -17,10 +17,15 @@
         </div>
         <div v-if="showSettings" class="mb-4">
             <div class="flex">
-                <button @click="toggleDirection" class="mb-1 w-full btn btn-theme">Read Direction: <span class="uppercase">{{settings.direction}}</span></button>
-                <button @click="toggleLights" class="mb-1 w-full btn btn-theme-inv">Lights: {{settings.dark ? 'Off' : 'On'}}</button>
+                <button @click="toggleDirection" class="mb-1 w-full btn btn-theme"><span>[Shift+R]</span> Read Direction: <span class="uppercase">{{settings.direction}}</span></button>
+                <button @click="toggleLights" class="mb-1 w-full btn btn-theme-inv"><span>[Shift+L]</span> Lights: {{settings.dark ? 'Off' : 'On'}}</button>
             </div>
-            <button @click="togglePadding" v-show="settings.direction == 'ver'" class="w-full btn btn-theme-inv">Vertical Padding: {{settings.vertical_padding ? 'On' : 'Off'}}</button>
+            <button @click="togglePadding" v-show="settings.direction == 'ver'" class="w-full btn btn-theme-inv"><span>[Shift+P]</span> Vertical Padding: {{settings.vertical_padding ? 'On' : 'Off'}}</button>
+        </div>
+        <div v-show="showPopup" id="info-popup" class="flex fixed left-0 right-0 z-100 top-1/2 transition-all duration-150" :class="{'md:ml-80': $store.state.sidebar_open}">
+            <div class="mx-auto">
+                <p class="bg-white dark:bg-dt-300 dark:text-white rounded-lg p-4 text-2xl shadow-lg z-100 text-center">{{popupText}}</p>
+            </div>
         </div>
     </div>
 </template>
@@ -31,8 +36,22 @@ export default {
     data(){
         return {
             showSettings: false,
+            showPopup: false,
+            popupText: '',
+            popupTimeout: null,
         }
     },
+    mounted() {
+        this.carryVert();
+    },
+	beforeMount() {
+		window.addEventListener("keyup", this.handleKeys);
+		window.addEventListener("scroll", this.carryVert);
+	},
+	beforeDestroy() {
+		window.removeEventListener("keyup", this.handleKeys);
+		window.removeEventListener("scroll", this.carryVert);
+	},
     methods: {
         updateSettings(settings){
             this.$emit('update-settings',settings);
@@ -50,6 +69,7 @@ export default {
                 dark: this.settings.dark,
                 vertical_padding: this.settings.vertical_padding
             });
+            this.showPopupSeconds(2, 'Reading Direction: '+ newDir.toUpperCase());
         },
         toggleLights(){
             this.updateSettings({
@@ -57,6 +77,7 @@ export default {
                 dark: !this.settings.dark,
                 vertical_padding: this.settings.vertical_padding
             });
+            this.showPopupSeconds(2, 'Lights: '+ (!this.settings.dark ? 'Off' : 'On'));
         },
         togglePadding(){
             this.updateSettings({
@@ -64,6 +85,27 @@ export default {
                 dark: this.settings.dark,
                 vertical_padding: !this.settings.vertical_padding
             });
+            this.showPopupSeconds(2, 'Vertical Padding: '+ (this.settings.vertical_padding ? 'Off' : 'On'));
+        },
+        showPopupSeconds(sec, text){
+            this.showPopup = true;
+            this.popupText = text;
+            if(this.popupTimeout !== null) clearTimeout(this.popupTimeout);
+            this.popupTimeout = setTimeout(() => {
+                this.showPopup = false;
+            }, sec * 1000);
+        },
+        carryVert(event) {
+			let st = window.pageYOffset || document.documentElement.scrollTop;
+            document.querySelector("#info-popup").style.top = st + (window.innerHeight /2) + 'px';
+		},
+        handleKeys(e){
+            //R Key + shift
+            if(e.keyCode === 82 && e.shiftKey === true) this.toggleDirection();
+            //L Key + shift
+            if(e.keyCode === 76 && e.shiftKey === true) this.toggleLights();
+            //P Key + shift
+            if(this.$store.state.reader_settings.direction == 'ver' && e.keyCode === 80 && e.shiftKey === true) this.togglePadding();
         }
     }
 }

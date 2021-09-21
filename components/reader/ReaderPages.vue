@@ -59,7 +59,6 @@ export default {
             this.slide_direction = this.settings.direction === "rtl" ? 'right' : 'left';
         }
     },
-
 }
 </script>
 

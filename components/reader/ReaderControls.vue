@@ -60,6 +60,12 @@ export default {
     beforeUnmount() {
         clearTimeout(this.autoHideTimeout);
     },
+	beforeMount() {
+		window.addEventListener("keyup", this.handleKeys);
+	},
+	beforeDestroy() {
+		window.removeEventListener("keyup", this.handleKeys);
+	},
     methods: {
         next(skip = false) {
             if(this.settings.direction == 'ltr') this.$emit("next-page", skip);
@@ -79,6 +85,17 @@ export default {
             this.visible = true;
             this.hideControlsTime();
         },
+        handleKeys(e){
+            console.log(e);
+            //Right Arrow Key
+            if(e.keyCode === 39 && e.ctrlKey === false) this.next(false);
+            //Left Arrow Key
+            if(e.keyCode === 37 && e.ctrlKey === false) this.prev(false);
+            //Right Arrow Key + Ctrl
+            if(e.keyCode === 39 && e.ctrlKey === true) this.next(true);
+            //Left Arrow Key + Ctrl
+            if(e.keyCode === 37 && e.ctrlKey === true) this.prev(true);
+        }
     }
 }
 </script>

@@ -38,6 +38,7 @@ export default {
     methods: {
         toggleNav(){
             this.nav_open = !this.nav_open;
+            this.$store.commit('setSideBarOpen', this.nav_open);
         },
         startTouch(){
             this.touchstartX = event.changedTouches[0].screenX;

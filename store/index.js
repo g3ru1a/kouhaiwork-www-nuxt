@@ -8,7 +8,8 @@ export const state = () => ({
 		vertical_padding: false
 	},
 	dark_theme: false,
-	vert_reader_drawer_open: false
+	vert_reader_drawer_open: false,
+	sidebar_open: false,
 });
 
 export const mutations = {
@@ -29,6 +30,9 @@ export const mutations = {
 	},
 	setVertReaderDrawer(state, open) {
 		state.vert_reader_drawer_open = open;
+	},
+	setSideBarOpen(state, open){
+		state.sidebar_open = open;
 	}
 };
 
