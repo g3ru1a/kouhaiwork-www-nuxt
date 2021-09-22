@@ -9,12 +9,12 @@
 			<button @click="toggleInfo" class="btn-tall btn-block btn-theme-inv md:hidden">
 				Chapters
 			</button>
-			<nuxt-link 
+			<a 
                 v-if="info.chapters && info.chapters.length > 0"
-                :to="`/read/${info.chapters[0].id}`" 
+                :href="`/read/${info.chapters[0].id}`" 
                 class="btn-tall btn-block btn-theme">
 				Start Reading
-			</nuxt-link>
+			</a>
 		</div>
 		<div>
             <h2 class="header">Synopsis</h2>

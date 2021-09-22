@@ -59,10 +59,10 @@ export default {
             this.$store.commit('setVertReaderDrawer', this.open);
         },
         nextChap(){
-            this.$router.push("/read/" + this.next_id);
+            window.location.replace("/read/" + this.next_id);
         },
         prevChap(){
-            this.$router.push("/read/" + this.prev_id);
+            window.location.replace("/read/" + this.prev_id);
         }
 	}
 };

@@ -13,10 +13,9 @@
 			</div>
 			<p class="banner-synopsis">{{ latest.synopsis }}</p>
 			<div class="banner-action">
-				<button class="banner-button" 
-				@click="$router.push(`/read/${latest.latest_chapter.id}`)">
+				<a class="banner-button" :href="`/read/${latest.latest_chapter.id}`">
 					Check It Out
-				</button>
+				</a>
 				<p class="banner-ch">
 					<span class="text-theme-dark dark:text-theme"
 						>Chapter

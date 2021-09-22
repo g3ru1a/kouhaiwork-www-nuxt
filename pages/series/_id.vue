@@ -30,10 +30,21 @@ export default {
         console.log(this.$route.path);
     },
 	async asyncData(context) {
+        if(process.client){
+            return;
+        }
         let inf = null;
-        await context.$axios
-			.get("/mangas/" + Number(context.params.id))
-			.then(resp => (inf = resp.data.data));
+        let infCache = await context.$redis.get("series-"+context.params.id);
+        if(infCache != null) {
+            inf = JSON.parse(infCache);
+        }else {
+            await context.$axios
+                .get("/mangas/" + Number(context.params.id))
+                .then(resp => {
+                    inf = resp.data.data
+                    context.$redis.set("series-"+context.params.id, JSON.stringify(inf), {EX: process.env.redisExpireTime});
+                });
+        }
         return {info: inf};
 	},
 	head(){

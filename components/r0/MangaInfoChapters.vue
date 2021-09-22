@@ -8,7 +8,7 @@
                 :key="chap.id">
                 <div
                     class="chapter-inner"
-                    @click="$router.push('/read/'+chap.id)"
+                    @click="redirectTo('/read/'+chap.id)"
                 >
                     <p class="italic text-sm text-gray-600 dark:text-gray-200">{{prettyDate(chap.updated_at)}}</p>
                     <h2 class="number">
@@ -42,6 +42,9 @@ export default {
 			};
 			return date.toLocaleString("en-US", options);
 		},
+        redirectTo(url){
+            window.location.replace(url);
+        }
     }
 };
 </script>

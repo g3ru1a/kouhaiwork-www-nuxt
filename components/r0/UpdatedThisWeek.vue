@@ -3,7 +3,7 @@
 		<h1 class="week-title">Latest Chapters</h1>
 		<div class="series-container">
 			<div class="series" v-for="(series, index) in week" :key="index">
-				<div class="series-inner" @click="$router.push('/series/'+series.id)">
+				<div class="series-inner" @click="redirectToSeries(series)">
                     <img class="series-cover" :src="series.cover" alt="" />
                     <div class="series-info">
                         <h1 class="series-title">{{ series.title }}</h1>
@@ -21,6 +21,11 @@
 <script>
 export default {
 	props: ['week'],
+	methods: {
+		redirectToSeries(series){
+			window.location.replace('/series/'+series.id)
+		}
+	}
 };
 </script>
 

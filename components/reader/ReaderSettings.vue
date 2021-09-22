@@ -1,7 +1,7 @@
 <template>
     <div class="w-full md:px-4 lg:px-0 lg:mx-auto lg:w-4/5 2xl:w-2/3 3xl:w-1/2">
         <div class="form-group-inline">
-            <div @click="$router.push('/series/'+manga_id)" class="cursor-pointer w-full p-4 bg-white text-theme border border-theme flex items-center justify-center dark:bg-dt-300 dark:border-dt-theme">
+            <div @click="redirectTo('/series/'+manga_id)" class="cursor-pointer w-full p-4 bg-white text-theme border border-theme flex items-center justify-center dark:bg-dt-300 dark:border-dt-theme">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                 </svg>
@@ -106,6 +106,9 @@ export default {
             if(e.keyCode === 76 && e.shiftKey === true) this.toggleLights();
             //P Key + shift
             if(this.$store.state.reader_settings.direction == 'ver' && e.keyCode === 80 && e.shiftKey === true) this.togglePadding();
+        },
+        redirectTo(url){
+            window.location.replace(url);
         }
     }
 }

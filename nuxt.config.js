@@ -45,6 +45,7 @@ export default {
 		{ src: "~plugins/nuxt-quill-plugin", ssr: false },
 		{ src: "~plugins/vuex-persist.js", ssr: false },
 		{ src: "~plugins/gtm.js", ssr: false },
+		{ src: "~plugins/redis.js", ssr: true },
 		"~/plugins/axios",
 		"~/plugins/directives"
 	],
@@ -85,7 +86,9 @@ export default {
 	env: {
 		apiURL: process.env.APP_API_URL || "https://api.kouhai.work/api/",
 		appVersion: process.env.APP_VERSION || "2.0.0",
-		gtmID: process.env.GTM_ID || "111"
+		gtmID: process.env.GTM_ID || "111",
+		redisURL: process.env.REDIS_URL || "localhost",
+		redisExpireTime: process.env.REDIS_EXPIRE_TIME || "30"
 	},
 
 	// Build Configuration: https://go.nuxtjs.dev/config-build

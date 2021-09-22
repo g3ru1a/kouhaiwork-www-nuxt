@@ -20,24 +20,16 @@
 
 <script>
 export default {
+	props: ['announcements'],
 	data() {
 		return {
 			list: []
 		};
 	},
-	mounted() {
-		this.loadAnnouncements();
+	mounted(){
+		this.list = this.announcements.slice();
 	},
 	methods: {
-		loadAnnouncements() {
-			this.$axios
-				.get("/announcements")
-				.then(response => {
-					this.list = response.data;
-					console.log(this.list);
-				})
-				.catch(error => alert(error.response.data));
-		},
 		prettyDate(uglyDate) {
 			let date = new Date(uglyDate);
 			let options = {

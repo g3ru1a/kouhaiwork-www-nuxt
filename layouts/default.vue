@@ -4,7 +4,7 @@
             <tailwindhelper v-show="inDevMode"></tailwindhelper>
             <TopNav :open="nav_open" v-on:toggle_nav="toggleNav()"></TopNav>
             <SideNav :open="nav_open" v-on:toggle_nav="toggleNav()"></SideNav>
-            <Nuxt id="content" class="flex-1 transform transition-all duration-150 pt-16" :class="{'lg:pl-80': nav_open}" />
+            <Nuxt :key="$route.fullPath" id="content" class="flex-1 transform transition-all duration-150 pt-16" :class="{'lg:pl-80': nav_open}" />
         </div>
         <div v-show="show_cookie_banner" class="fixed bottom-0 left-0 right-0 bg-theme-light shadow-lg z-100">
             <div class="w-full flex flex-col md:flex-row items-center justify-evenly p-4">

@@ -2,7 +2,7 @@
 	<div
 		v-if="chapter && settings"
 		class="w-full h-full"
-		:class="{ 'bg-black': settings.dark, 'bg-white': !settings.dark}"
+		:class="{ 'bg-black': settings.dark, 'bg-white': !settings.dark }"
 	>
 		<reader-settings
 			:settings="settings"
@@ -40,31 +40,46 @@ export default {
 		};
 	},
 	async asyncData(context) {
+		if (process.client) {
+			return;
+		}
 		let ch, next, prev;
-		await context.$axios
+		let chapCache = await context.$redis.get(
+			`chapter_${context.params.id}`
+		);
+		if (chapCache != null) {
+			let parsed = JSON.parse(chapCache);
+			ch = parsed.chapter;
+			next = parsed.next_id;
+			prev = parsed.prev_id;
+		} else {
+			await context.$axios
 				.get("/chapters/" + Number(context.params.id))
 				.then(response => {
 					ch = response.data.chapter;
 					next = response.data.next_id;
 					prev = response.data.prev_id;
+					context.$redis.set("chapter_"+context.params.id, JSON.stringify(response.data), {EX: process.env.redisExpireTime});
 				})
 				.catch(err => console.log(err));
-		return {chapter: ch, next_id: next, prev_id: prev};
+		}
+
+		return { chapter: ch, next_id: next, prev_id: prev };
 	},
 	mounted() {
 		// this.loadPages();
-		this.settings = {...this.$store.state.reader_settings};
+		this.settings = { ...this.$store.state.reader_settings };
 		if (this.settings == null || this.settings == undefined) {
 			this.settings = {
 				dark: this.$store.state.dark_theme,
 				direction: "ltr",
 				vertical_padding: false
 			};
-			this.$store.dispatch('setReaderSettingsA', {...this.settings});
+			this.$store.dispatch("setReaderSettingsA", { ...this.settings });
 		}
-		if(this.$store.state.dark_theme) {
+		if (this.$store.state.dark_theme) {
 			this.settings.dark = true;
-			this.$store.dispatch('setReaderSettingsA', {...this.settings});
+			this.$store.dispatch("setReaderSettingsA", { ...this.settings });
 		}
 	},
 	methods: {
@@ -80,40 +95,52 @@ export default {
 		},
 		updateSettings(newSettings) {
 			this.settings = newSettings;
-			this.$store.dispatch('setReaderSettingsA', {...this.settings});
+			this.$store.dispatch("setReaderSettingsA", { ...this.settings });
 		}
 	},
-	head(){
+	head() {
 		return {
-			title: 'Chapter '+this.chapter.number +' | '+this.chapter.manga.title,
-            meta:  [
-                {
-                    hid: 'description',
-                    name: 'description',
-                    content: `${this.chapter.manga.title} chapter ${this.chapter.number} ${(this.chapter.name) ? this.chapter.name : ''}`
-                },
-                {
-                    hid: 'og-title',
-                    property: 'og:title',
-                    content: 'Chapter '+this.chapter.number +' | '+this.chapter.manga.title
-                },
-                {
-                    hid: 'og-description',
-                    property: 'og:description',
-                    content: `${this.chapter.manga.title} chapter ${this.chapter.number} ${(this.chapter.name) ? this.chapter.name : ''}`
-                },
-                {
-                    hid: 'og-image',
-                    property: 'og:image',
-                    content: this.chapter.manga.cover
-                },
-                {
-                    hid: 'og-url',
-                    property: 'og:url',
-                    content: 'https://kouhai.work'+this.$route.path
-                }
-            ]
-		}
+			title:
+				"Chapter " +
+				this.chapter.number +
+				" | " +
+				this.chapter.manga.title,
+			meta: [
+				{
+					hid: "description",
+					name: "description",
+					content: `${this.chapter.manga.title} chapter ${
+						this.chapter.number
+					} ${this.chapter.name ? this.chapter.name : ""}`
+				},
+				{
+					hid: "og-title",
+					property: "og:title",
+					content:
+						"Chapter " +
+						this.chapter.number +
+						" | " +
+						this.chapter.manga.title
+				},
+				{
+					hid: "og-description",
+					property: "og:description",
+					content: `${this.chapter.manga.title} chapter ${
+						this.chapter.number
+					} ${this.chapter.name ? this.chapter.name : ""}`
+				},
+				{
+					hid: "og-image",
+					property: "og:image",
+					content: this.chapter.manga.cover
+				},
+				{
+					hid: "og-url",
+					property: "og:url",
+					content: "https://kouhai.work" + this.$route.path
+				}
+			]
+		};
 	}
 };
 </script>

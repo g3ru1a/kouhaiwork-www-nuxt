@@ -25,11 +25,21 @@ export default {
 		};
 	},
 	async asyncData(context) {
+		if(process.client) return;
 		let options;
-		await context.$axios
+		let optionsCache = await context.$redis.get("search-parameters");
+		if(optionsCache != null){
+			options = JSON.parse(optionsCache);
+		}else{
+			await context.$axios
 			.get("/search/parameters")
-			.then(resp => (options = resp.data))
+			.then(resp => {
+				options = resp.data;
+				context.$redis.set("search-parameters", JSON.stringify(options), {EX:process.env.redisExpireTime});
+			})
 			.catch(err => console.log(err.response));
+		}
+	
         return {
             genres: options.g.map(e => ({id: e[0], name:e[1]})),
             themes: options.t.map(e => ({id: e[0], name:e[1]})),
