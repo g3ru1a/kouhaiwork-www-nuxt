@@ -1,11 +1,10 @@
 import Vue from "vue";
-import { createClient } from "redis";
+// import { createClient } from "redis";
+const redis = require('redis');
 
-const redis = async (context) => {
+const red = async (context) => {
     if(process.server){
-        let client = createClient({
-			url: process.env.redisURL
-		});
+        let client = redis.createClient(process.env.redisURL);
 		client.on("ready", () => {
 			console.log("Connected to redis");
 		});
@@ -16,5 +15,5 @@ const redis = async (context) => {
     }
 }
 
-export default redis;
+export default red;
 
