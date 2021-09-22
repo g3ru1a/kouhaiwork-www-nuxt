@@ -1,14 +1,13 @@
 import Vue from "vue";
-// import { createClient } from "redis";
-const redis = require('redis');
+import { createClient } from "redis";
 
 const red = async (context) => {
     if(process.server){
-        let client = redis.createClient(process.env.redisURL);
+        const client = createClient(process.env.DATABASE_URL);
 		client.on("ready", () => {
-			console.log("Connected to redis");
+			console.log("Connected to redis", client);
 		});
-		client.on("error", err => console.log("[My Plugin] Redis Client Error", err, "url: "+process.env.redisURL, "rawURl: "+process.env.REDIS_URL));
+		client.on("error", err => console.log("[My Plugin] Redis Client Error", err, "url: "+process.env.DATABASE_URL));
 
 		await client.connect();
 		context.$redis = client;
