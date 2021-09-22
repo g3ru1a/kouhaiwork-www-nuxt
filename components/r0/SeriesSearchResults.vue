@@ -28,9 +28,9 @@
 		</div>
 
 		<div class="results" :class="[view_grid ? 'grid' : 'list']">
-			<div class="result" v-for="result in results" :key="result.id">
+			<div class="result" v-for="result in processedResults" :key="result.id">
 				<div class="result-inner">
-					<img class="result-image" :src="result.cover.url" alt="" />
+					<img class="result-image" :src="result.cover" alt="" />
 					<div class="result-info">
                         <div class="result-info-inner">
                             <h1 class="title">{{ result.title }}</h1>
@@ -54,6 +54,17 @@ export default {
 		return {
 			view_grid: true
 		};
+	},
+	computed: {
+		processedResults(){
+			return this.results.map(obj => ({
+				id: obj[0],
+				title: obj[1],
+				synopsis: obj[2],
+				chapters_count: obj[3],
+				cover: obj[4],
+			}))
+		}
 	}
 };
 </script>

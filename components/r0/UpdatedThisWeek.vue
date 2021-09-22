@@ -4,12 +4,12 @@
 		<div class="series-container">
 			<div class="series" v-for="(series, index) in week" :key="index">
 				<div class="series-inner" @click="$router.push('/series/'+series.id)">
-                    <img class="series-cover" :src="series.cover.url" alt="" />
+                    <img class="series-cover" :src="series.cover" alt="" />
                     <div class="series-info">
                         <h1 class="series-title">{{ series.title }}</h1>
                         <p class="series-chapter">
                             Chapter
-                            {{ series.chapters[series.chapters.length - 1].number }}
+                            {{ series.latest_chapter_number }}
                         </p>
                     </div>
                 </div>
@@ -20,24 +20,7 @@
 
 <script>
 export default {
-	data() {
-		return {
-			week: null
-		};
-	},
-	mounted() {
-		this.loadData();
-	},
-	methods: {
-		async loadData() {
-			await this.$axios
-				.get("/manga/week")
-				.then(response => {
-					this.week = response.data;
-				})
-				.catch(err => console.log(err));
-		}
-	}
+	props: ['week'],
 };
 </script>
 

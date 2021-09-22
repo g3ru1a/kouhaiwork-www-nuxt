@@ -105,7 +105,7 @@ export default {
                 {
                     hid: 'og-image',
                     property: 'og:image',
-                    content: this.chapter.manga.cover.url
+                    content: this.chapter.manga.cover
                 },
                 {
                     hid: 'og-url',

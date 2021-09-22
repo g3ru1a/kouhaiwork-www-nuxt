@@ -8,55 +8,33 @@
 					class="tag"
 					v-for="(tag, index) in latest.tags"
 					:key="index"
-					>{{ tag.name }}</span
+					>{{ tag }}</span
 				>
 			</div>
 			<p class="banner-synopsis">{{ latest.synopsis }}</p>
 			<div class="banner-action">
 				<button class="banner-button" 
-				@click="$router.push(`/read/${latest.chapters[latest.chapters.length - 1].id}`)">
+				@click="$router.push(`/read/${latest.latest_chapter.id}`)">
 					Check It Out
 				</button>
 				<p class="banner-ch">
 					<span class="text-theme-dark dark:text-theme"
 						>Chapter
 						{{
-							latest.chapters[latest.chapters.length - 1].number
+							latest.latest_chapter.number
 						}}</span
 					>
 					• {{ latest.status }}
 				</p>
 			</div>
 		</div>
-		<img class="banner-cover" :src="latest.cover.url" alt="" />
+		<img class="banner-cover" :src="latest.cover" alt="" />
 	</div>
 </template>
 
 <script>
 export default {
-	data() {
-		return {
-			latest: null,
-		};
-	},
-    mounted() {
-        this.loadData();
-    },
-    methods: {
-        async loadData() {
-            let latest;
-            await this.$axios
-                .get("/manga/latest")
-                .then(response => {
-                    latest = response.data;
-                    latest.tags = latest.genres.concat(latest.themes);
-                    latest.tags = latest.tags.concat(latest.demographics);
-                })
-                .catch(err => console.log(err));
-            this.latest = latest;
-        }
-    }
-	
+	props: ['latest'],
 };
 </script>
 

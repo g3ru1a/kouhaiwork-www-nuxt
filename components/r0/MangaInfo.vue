@@ -19,35 +19,35 @@
 		<div>
             <h2 class="header">Synopsis</h2>
             <p class="mb-2">{{ info.synopsis }}</p>
-            <template v-if="info.authors.length > 0 || info.artists.length > 0">
+            <template v-if="(info.authors && info.authors.length > 0) || (info.artists && info.artists.length > 0)">
                 <div class="flex items-start justify-evenly">
                     <div
-                        v-if="info.authors.length > 0"
+                        v-if="info.authors && info.authors.length > 0"
                         class="w-full text-left flex flex-col"
                     >
                         <h2 class="header">Authors</h2>
                         <div class="tag-container-np">
                             <p
-                                v-for="author in info.authors"
-                                :key="author.id"
+                                v-for="author,index in info.authors"
+                                :key="index"
                                 class="tag-lg tag-theme"
                             >
-                                {{ author.name }}
+                                {{ author }}
                             </p>
                         </div>
                     </div>
                     <div
-                        v-if="info.artists.length > 0"
+                        v-if="info.artists && info.artists.length > 0"
                         class="w-full text-left flex flex-col"
                     >
                         <h2 class="header">Artists</h2>
                         <div class="tag-container-np">
                             <p
-                                v-for="artist in info.artists"
-                                :key="artist.id"
+                                v-for="artist,index in info.artists"
+                                :key="index"
                                 class="tag-lg tag-theme"
                             >
-                                {{ artist.name }}
+                                {{ artist }}
                             </p>
                         </div>
                     </div>
@@ -65,41 +65,41 @@
                     </p>
                 </div>
             </template>
-            <template v-if="info.genres.length > 0">
+            <template v-if="info.genres && info.genres.length > 0">
                 <h2 class="header">Genres</h2>
                 <div class="tag-container-np">
                     <p
-                        v-for="genre in info.genres"
-                        :key="genre.id"
+                        v-for="genre,index in info.genres"
+                        :key="index"
                         class="tag-lg tag-theme"
                     >
-                        {{ genre.name }}
+                        {{ genre }}
                     </p>
                 </div>
             </template>
 
-            <template v-if="info.themes.length > 0">
+            <template v-if="info.themes && info.themes.length > 0">
                 <h2 class="header">Themes</h2>
                 <div class="tag-container-np">
                     <p
-                        v-for="theme in info.themes"
-                        :key="theme.id"
+                        v-for="theme,index in info.themes"
+                        :key="index"
                         class="tag-lg tag-theme"
                     >
-                        {{ theme.name }}
+                        {{ theme }}
                     </p>
                 </div>
             </template>
 
-            <template v-if="info.demographics.length > 0">
+            <template v-if="info.demographics && info.demographics.length > 0">
                 <h2 class="header">Demographics</h2>
                 <div class="tag-container-np">
                     <p
-                        v-for="demographic in info.demographics"
-                        :key="demographic.id"
+                        v-for="demographic,index in info.demographics"
+                        :key="index"
                         class="tag-lg tag-theme"
                     >
-                        {{ demographic.name }}
+                        {{ demographic }}
                     </p>
                 </div>
             </template>

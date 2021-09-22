@@ -6,7 +6,7 @@
 			class="relative flex"
             :class="{'mb-4': settings.vertical_padding}">
             <div class="mx-auto w-screen xl:w-auto xl:h-screen">
-                <img class="w-full h-full" :src="page.media.url" alt="" />
+                <img class="w-full h-full" :src="page.media" alt="" />
             </div>
 		</div>
         <div id="vert-settings" class="flex fixed top-1/2 right-0 transform-all duration-150">

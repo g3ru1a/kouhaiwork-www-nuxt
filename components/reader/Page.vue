@@ -2,7 +2,7 @@
     <transition appear :name="transitionEffect">
         <div class="reader-item absolute"
             v-show="currentPage === index">
-            <img class="reader-image" :src="page.media.url" alt="">
+            <img class="reader-image" :src="page.media" alt="">
         </div>
     </transition>
 </template>

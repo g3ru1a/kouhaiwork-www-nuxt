@@ -54,7 +54,7 @@
                     </p>
                 </div>
             </div>
-            <img class="w-48 mx-auto" src="/assets/logo.png" alt="" />
+            <img class="w-48 mx-auto" src="/logo.png" alt="" />
         </div>
     </div>
 </template>

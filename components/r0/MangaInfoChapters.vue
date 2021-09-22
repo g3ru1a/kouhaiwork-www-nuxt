@@ -19,7 +19,7 @@
                     </h2>
                     <p>{{ chap.name }}</p>
                     <p v-if="chap.group" class="italic">
-                        By: {{ chap.group.name }}
+                        By: {{ chap.group }}
                     </p>
                     <p v-if="chap.group == null" class="text-sm italic">No Group</p>
                 </div>

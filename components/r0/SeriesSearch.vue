@@ -82,12 +82,10 @@
 import axios from "axios";
 
 export default {
+	props: ['genres', 'themes', 'demographics'],
 	data() {
 		return {
 			search_input: "",
-			genres: [],
-			themes: [],
-			demographics: [],
 			status: [
 				{ id: 0, name: "Ongoing" },
 				{ id: 1, name: "Finished" },
@@ -101,9 +99,6 @@ export default {
 			},
 			cancel: null
 		};
-	},
-	mounted() {
-		this.loadFilters();
 	},
 	methods: {
 		search() {
@@ -126,27 +121,13 @@ export default {
 					this.cancel = null;
 					nct = null;
 					//Show results
-					this.$emit('searched', response.data);
+					this.$emit('searched', response.data.data);
 				})
 				.catch(err =>
 					err.response ? console.log(err.response) : null
 				);
 			this.cancel = nct;
 		},
-		loadFilters() {
-			this.$axios
-				.get("/manga/genres")
-				.then(resp => (this.genres = resp.data))
-				.catch(err => console.log(err.response));
-			this.$axios
-				.get("/manga/themes")
-				.then(resp => (this.themes = resp.data))
-				.catch(err => console.log(err.response));
-			this.$axios
-				.get("/manga/demographic")
-				.then(resp => (this.demographics = resp.data))
-				.catch(err => console.log(err.response));
-		}
 	}
 };
 </script>

@@ -2,9 +2,9 @@
 	<div>
 		<h1 class="week-title">All Series</h1>
 		<div class="series-container">
-			<div class="series" v-for="(series, index) in week" :key="index">
+			<div class="series" v-for="(series, index) in all" :key="index">
 				<div class="series-inner" @click="$router.push('/series/'+series.id)">
-                    <img class="series-cover" :src="series.cover.url" alt="" />
+                    <img class="series-cover" :src="series.cover" alt="" />
                     <div class="series-info">
                         <h1 class="series-title">{{ series.title }}</h1>
                     </div>
@@ -16,24 +16,7 @@
 
 <script>
 export default {
-	data() {
-		return {
-			week: null
-		};
-	},
-	mounted() {
-		this.loadData();
-	},
-	methods: {
-		async loadData() {
-			await this.$axios
-				.get("/manga/all")
-				.then(response => {
-					this.week = response.data;
-				})
-				.catch(err => console.log(err));
-		}
-	}
+	props: ['all'],
 };
 </script>
 

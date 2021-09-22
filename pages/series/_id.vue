@@ -6,7 +6,7 @@
             <div class="info-group">
                 <!-- image -->
                 <manga-info-cover
-                    :url="info.cover.url"
+                    :url="info.cover"
                     v-on:toggle_chapters="show_chapters = !show_chapters"
                 ></manga-info-cover>
                 <!-- info -->
@@ -33,7 +33,7 @@ export default {
         let inf = null;
         await context.$axios
 			.get("/mangas/" + Number(context.params.id))
-			.then(resp => (inf = resp.data));
+			.then(resp => (inf = resp.data.data));
         return {info: inf};
 	},
 	head(){
