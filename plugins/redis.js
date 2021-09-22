@@ -9,7 +9,7 @@ const redis = async (context) => {
 		client.on("ready", () => {
 			console.log("Connected to redis");
 		});
-		client.on("error", err => console.log("Redis Client Error", err));
+		client.on("error", err => console.log("[My Plugin] Redis Client Error", err, "url: "+process.env.redisURL, "rawURl: "+process.env.REDIS_URL));
 
 		await client.connect();
 		context.$redis = client;
