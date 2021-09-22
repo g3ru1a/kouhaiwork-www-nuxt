@@ -1,6 +1,6 @@
 <template>
 	<div id="navbar" class="navbar" :class="{ stuck: stuck, blocked: !stuck }">
-		<nuxt-link class="navbar-brand" to='/'>Kouhai.Work</nuxt-link>
+		<a class="navbar-brand" href='/'>Kouhai.Work</a>
 		<div class="flex">
 			<button @click="toggleDarkMode" class="w-12 text-center hover:bg-theme dark:hover:bg-dt-theme">
 				<svg v-show="$store.state.dark_theme" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">

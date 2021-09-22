@@ -2,7 +2,7 @@
     <div class="sidenav nobar" 
         :class="{'closed': !open}">
         
-        <div @click="$router.push('/')" class="relative cursor-pointer">
+        <div @click="redirectTo('/')" class="relative cursor-pointer">
             <img class="sidenav-logo" src="/logo.png" alt="">
             <p @click="$emit('toggle_nav')" class="absolute top-0 right-0 p-4">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -62,6 +62,11 @@ export default {
     data(){
         return {
             version: process.env.appVersion
+        }
+    },
+    methods: {
+        redirectTo(url){
+            window.location.replace(url);
         }
     }
 }
