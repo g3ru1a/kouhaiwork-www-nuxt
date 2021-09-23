@@ -14,7 +14,7 @@ export default {
 			.post("/logout")
 			.then(() => {
 				this.clearAuth();
-				this.$router.push("/");
+				window.location.href = "/";
 			})
 			.catch(error => {
 				if (error.response) {

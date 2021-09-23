@@ -69,7 +69,7 @@ export default {
                 this.error = '';
                 let router = this.$router;
                 setTimeout(() => {
-                    router.push('/login');
+                    window.location.href = '/login';
                 }, 3000);
 			}).catch(error => {
                 console.log(error);

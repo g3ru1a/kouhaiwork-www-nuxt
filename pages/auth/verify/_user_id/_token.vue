@@ -27,7 +27,7 @@ export default {
             this.success = response.data.message;
             let router = this.$router;
             setTimeout(function(){
-                router.push('/login');
+                window.location.href = '/login';
             }, 5000);
         })
         .catch(error => {

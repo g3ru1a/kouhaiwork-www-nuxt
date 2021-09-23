@@ -58,7 +58,7 @@ export default {
 				this.setToken(response.data.access_token);
 				this.setUser(response.data.user);
 				this.setAuthenticated(true);
-				this.$router.push("/");
+				window.location.href = "/";
 			}).catch(error => {
                 console.log(error);
                 if(error.response){
