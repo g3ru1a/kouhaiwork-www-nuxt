@@ -285,7 +285,7 @@ export default {
 					console.log(series);
 					axios({
 						method: "POST",
-						url: "http://45.55.106.226:8000/flush",
+						url: "https://cache.kouhai.work/flush",
 						data: {
 							series: JSON.stringify(series.map(e => e[0]))
 						}
