@@ -174,8 +174,10 @@
 
 <script>
 import draggable from "vuedraggable";
+import axios from 'axios';
 
 export default {
+	props: ['latest'],
 	components: { draggable },
 	data() {
 		return {
@@ -199,7 +201,7 @@ export default {
 		this.loadData();
 	},
 	methods: {
-		upload(keep) {
+		async upload(keep) {
             this.uploading = true;
             this.success = false;
             let formData = new FormData();
@@ -271,11 +273,27 @@ export default {
                         (event.loaded * 100) / event.total
                     );
                 },
-            }).then(response => {
+            }).then(async response => {
                 console.log(response.data);
                 this.errors = {};
                 // this.uploading=false;
                 this.success = true;
+
+				try {
+					let resp = await this.$axios.get("/r2/series/since/"+this.latest.latest_chapter.id);
+					let series = resp.data.data;
+					console.log(series);
+					axios({
+						method: "POST",
+						url: "http://localhost:3456/flush",
+						data: {
+							series: JSON.stringify(series.map(e => e[0]))
+						}
+					});
+				} catch (error) {
+					console.log(error);
+				}
+
                 if(keep){
                     this.pages = null;
                     this.order_array = null;
@@ -284,12 +302,12 @@ export default {
                     this.uploading = false;
                 }else {
                     setTimeout(() => {
-                        this.$router.push('/series/'+response.data.chapter.manga_id)
+                        window.location.href = '/series/'+response.data.chapter.manga_id;
                     }, 2000);
                 }
             })
             .catch(error => {
-                console.log(error.response.data)
+                console.log(error.response)
                 if(error){
                     if(error.response){
                         this.errors = {
