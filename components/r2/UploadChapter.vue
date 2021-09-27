@@ -242,16 +242,18 @@ export default {
                 this.success = true;
 
 				try {
-					let resp = await this.$axios.get("/r2/series/since/"+this.latest.latest_chapter.id);
-					let series = resp.data.data;
-					console.log(series);
+					// let resp = await this.$axios.get("/r2/series/since/"+this.latest.latest_chapter.id);
+					// let series = resp.data.data;
+					// console.log(series);
 					axios({
 						method: "POST",
 						url: "https://cache.kouhai.work/flush",
+						// url: "http://localhost:3456/flush",
 						data: {
-							series: JSON.stringify(series.map(e => e[0]))
+							series: response.data.chapter.manga_id,
+							chapter: response.data.chapter.id
 						}
-					});
+					}).then(res => console.log('Cache Request'));
 				} catch (error) {
 					console.log(error);
 				}
