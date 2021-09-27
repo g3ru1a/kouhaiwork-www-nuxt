@@ -37,7 +37,7 @@
 			<!-- page input -->
 			<div class="form-group">
                 <error-bubble v-if="errors.pages" :text="errors.pages"></error-bubble>
-                <p class="mb-2 text-center text-sm italic">Only add pages if you want to change or re-order them.(Adding pages will replace existing ones)</p>
+                <p class="mb-2 text-center text-sm italic">Only add pages if you want to change or re-order them.(Adding pages will replace existing ones). File upload here is limited to 95MB, if you want to files that are bigger than that, delete and reupload the chapter.</p>
 				<button
 					@click="$refs.page_input.click()"
 					class="btn btn-block btn-theme-inv flex justify-center"
@@ -263,9 +263,9 @@ export default {
                         return;
                     }
                     totalSize += mbSize;
-                    if(totalSize > 200) {
+                    if(totalSize > 95) {
                         this.errors = {
-                            pages: 'Pages total size is too big (max 200MB).'
+                            pages: 'Pages total size is too big (max 95MB).'
                         };
                         this.uploading = false;
                         return;

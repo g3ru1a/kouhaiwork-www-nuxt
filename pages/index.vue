@@ -20,6 +20,10 @@ export default {
 			await context.$axios
 				.get("/manga/latest")
 				.then(response => {
+					if(response.data.error){
+						l = null;
+						return;
+					}
 					l = response.data.data;
 					context.$redis.set("homepage-latest",JSON.stringify(l),{EX: process.env.redisExpireTime});
 				})

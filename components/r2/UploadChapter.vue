@@ -160,13 +160,13 @@
 							</circle>
 						</svg>
 						<p class="mx-1 py-1 dark:text-white">
-							Uploading Chapter {{ uploadPerc }}%
+							{{uploadMsg}} {{ uploadPerc }}%
 						</p>
 					</div>
 				</div>
 			</div>
-			<p v-if="success" class="text-base">
-				Upload Complete! Redirecting...
+			<p v-if="success" class="text-base dark:text-white">
+				Upload Complete! It might take a minute or two for the files to process. If more than 10 minutes pass and the chapter is still not available please contact us. Redirecting...
 			</p>
 		</div>
 	</div>
@@ -182,6 +182,7 @@ export default {
 	data() {
 		return {
 			uploading: false,
+			uploadMsg: 'Uploading Chapter Info',
 			success: false,
 			loaded: false,
 			series_list: [],
@@ -204,66 +205,10 @@ export default {
 		async upload(keep) {
             this.uploading = true;
             this.success = false;
-            let formData = new FormData();
-            if(this.volume) formData.append('volume', this.volume);
-            if(this.name) formData.append('chapter_name', this.name);
-            if(this.number) formData.append('chapter', this.number);
-            else {
-                this.errors = {
-                    number: 'Can\'t upload without a chapter number specified.'
-                };
-                this.uploading = false;
-                return;
-            }
-            if(this.series) formData.append('manga_id', this.series.id);
-            else {
-                this.errors = {
-                    series: 'Can\'t upload without a series selected.'
-                };
-                this.uploading = false;
-                return;
-            }
-            if(this.group) formData.append('group_id', this.group.id);
-            else {
-                this.errors = {
-                    group: 'Can\'t upload without a group selected.'
-                };
-                this.uploading = false;
-                return;
-            }
-            if(this.order_array == null){
-                this.errors = {
-                    pages: 'Chapter Pages are missing.'
-                };
-                this.uploading = false;
-                return;
-            }
-            let order = [];
-            for(var j = 0; j < this.order_array.length; j++){
-                order.push(this.order_array[j].id);
-            }
-            formData.append('order', JSON.stringify(order));
-            let totalSize = 0;
-            for(var i = 0; i < this.pages.length; i++ ){
-                let page = this.pages[i];
-                let mbSize = page.size / 1024 / 1024;
-                if(mbSize > 10){
-                    this.errors = {
-                        pages: 'Page: ' + page.name + ' is too big (max 10MB).'
-                    };
-                    this.uploading = false;
-                    return;
-                }
-                totalSize += mbSize;
-                if(totalSize > 200) {
-                    this.errors = {
-                        pages: 'Pages total size is too big (max 200MB).'
-                    };
-                    this.uploading = false;
-                    return;
-                }
-                formData.append('pages[' + i + ']', page);
-            }
+            let formData = this.prepareData();
+			let pageDataArray = this.preparePagesData();
+			if(formData == null || pageDataArray.length == 0) return;
+
             this.$axios.post('/chapter/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -275,6 +220,23 @@ export default {
                 },
             }).then(async response => {
                 console.log(response.data);
+				for (let i = 0; i < pageDataArray.length; i++) {
+					let pageData = pageDataArray[i];
+					pageData.append('chapter_id', response.data.chapter.id);
+					this.uploadMsg = 'Uploading Pages... Batch '+(i+1)+'/'+pageDataArray.length;
+					console.log('batch '+(i+1)+'/'+pageDataArray.length);
+					await this.$axios.post('/chapter/upload/pages', pageData, {
+						headers: {
+							'Content-Type': 'multipart/form-data'
+						},
+						onUploadProgress: event => {
+							this.uploadPerc = Math.round(
+								(event.loaded * 100) / event.total
+							);
+						},
+					});
+				}
+
                 this.errors = {};
                 // this.uploading=false;
                 this.success = true;
@@ -323,6 +285,87 @@ export default {
                 this.uploading=false;
             })
         },
+		prepareData(){
+			let formData = new FormData();
+            if(this.volume) formData.append('volume', this.volume);
+            if(this.name) formData.append('chapter_name', this.name);
+            if(this.number) formData.append('chapter', this.number);
+            else {
+                this.errors = {
+                    number: 'Can\'t upload without a chapter number specified.'
+                };
+                this.uploading = false;
+                return null;
+            }
+            if(this.series) formData.append('manga_id', this.series.id);
+            else {
+                this.errors = {
+                    series: 'Can\'t upload without a series selected.'
+                };
+                this.uploading = false;
+                return null;
+            }
+            if(this.group) formData.append('group_id', this.group.id);
+            else {
+                this.errors = {
+                    group: 'Can\'t upload without a group selected.'
+                };
+                this.uploading = false;
+                return null;
+            }
+            if(this.order_array == null){
+                this.errors = {
+                    pages: 'Chapter Pages are missing.'
+                };
+                this.uploading = false;
+                return null;
+            }
+            return formData;
+		},
+		preparePagesData(){
+			let dataArr = [];
+			let formData = new FormData();
+			let order = [];
+			let lastInd = 0;
+            let totalSize = 0;
+			let totalBatchSize = 0;
+            for(var i = 0; i < this.order_array.length; i++ ){
+                let page = this.pages[this.order_array[i].id];
+                let mbSize = page.size / 1024 / 1024;
+                if(mbSize > 10){
+                    this.errors = {
+                        pages: 'Page: ' + page.name + ' is too big (max 10MB).'
+                    };
+                    this.uploading = false;
+                    return [];
+                }
+                totalSize += mbSize;
+                if(totalSize > 200) {
+                    this.errors = {
+                        pages: 'Pages total size is too big (max 200MB).'
+                    };
+                    this.uploading = false;
+                    return [];
+                }
+                totalBatchSize += mbSize;
+				if(totalBatchSize > 90){
+            		formData.append('order', JSON.stringify(order));
+					dataArr.push(formData);
+					formData = new FormData();
+					order = [];
+					totalBatchSize = 0;
+					lastInd = i;
+				}
+				console.log('BatchSize', totalBatchSize);
+                formData.append('pages[' + i + ']', page);
+                order.push(i - lastInd);
+            }
+			if(order.length > 0){
+            	formData.append('order', JSON.stringify(order));
+				dataArr.push(formData);
+			}
+			return dataArr.reverse();
+		},
 		onImageInputChange(e) {
 			let files = e.target.files;
 			this.pages = files;
