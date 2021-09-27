@@ -166,7 +166,7 @@
 				</div>
 			</div>
 			<p v-if="success" class="text-base dark:text-white">
-				Upload Complete! It might take a minute or two for the files to process. If more than 10 minutes pass and the chapter is still not available please contact us. Redirecting...
+				Upload Complete! It might take a minute or two for the files to process. If more than 20 minutes pass and the chapter is still not available please contact us. Redirecting...
 			</p>
 		</div>
 	</div>
