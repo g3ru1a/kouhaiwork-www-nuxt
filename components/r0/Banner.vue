@@ -2,7 +2,7 @@
 	<div v-if="latest" class="banner">
 		<div class="banner-info">
 			<p class="banner-nc">New Chapter</p>
-			<h1 class="banner-title">{{ latest.title }}</h1>
+			<a :href="`/series/${latest.id}`" class="banner-title">{{ latest.title }}</a>
 			<div class="tag-container banner-tags">
 				<span
 					class="tag"
