@@ -69,7 +69,7 @@ export default {
                 {
                     hid: 'og-image',
                     property: 'og:image',
-                    content: this.info.cover.url
+                    content: this.info.cover
                 },
                 {
                     hid: 'og-url',
