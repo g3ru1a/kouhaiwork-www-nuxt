@@ -247,8 +247,8 @@ export default {
 					// console.log(series);
 					axios({
 						method: "POST",
-						url: "https://cache.kouhai.work/flush",
-						// url: "http://localhost:3456/flush",
+						// url: "https://cache.kouhai.work/flush",
+						url: "http://localhost:3456/flush",
 						data: {
 							series: response.data.chapter.manga_id,
 							chapter: response.data.chapter.id
