@@ -74,7 +74,7 @@
 			</div>
             <div v-show="results && results.length > 0" class="">
 				<div v-for="res in results" :key="res.id" @click="select(res)" class="panel panel-white result">
-					<img class="h-24 w-16 object-cover" :src="(res.manga !== null) ? res.manga.cover.url : '/img-place.jpg'" alt="" />
+					<img class="h-24 w-16 object-cover" :src="(res.manga !== null) ? mediaPage(res.manga.cover.url) : '/img-place.jpg'" alt="" />
 					<div class="px-2 flex flex-col items-start justify-center">
 						<p class="text-xl">
 							Chapter {{ res.number }} <span v-if="res.name">- {{ res.name }}</span>
@@ -107,7 +107,7 @@ export default {
 			if (this.input == "") return;
 			this.searching = true;
 			this.$axios
-				.post("/chapters/search/", {
+				.post("/groups/chapters/search/", {
 					search: this.input.split(" ").join("_")
 				})
 				.then(response => {
@@ -120,6 +120,12 @@ export default {
 					this.searching = false;
 					console.log(error.response.data);
 				});
+		},
+		mediaPage(pageurl) {
+			let apiUrlWV = process.env.apiURL;
+			let apiurl =
+				apiUrlWV.substring(0, apiUrlWV.length - 3) + "storage/";
+			return apiurl + pageurl;
 		}
 	}
 };

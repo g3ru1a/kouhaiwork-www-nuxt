@@ -65,7 +65,7 @@
 				<p class="font-semibold">Add Members</p>
 				<lookup-select
 					ref="user_select"
-					url="/users/r2/"
+					url="/search/users/r2/"
 					:filter="info.members"
 					:spaces="false"
 					v-on:selection="newMembers = $event"
@@ -175,7 +175,7 @@ export default {
 			}
 			this.updating = true;
 			this.$axios
-				.delete("/groups/delete/" + this.group.id)
+				.delete("/groups/me/" + this.group.id)
 				.then(response => {
 					this.updating = false;
 					this.$emit('delete')
@@ -192,7 +192,7 @@ export default {
 		updateName() {
 			this.updating = true;
 			this.$axios
-				.put("/groups/update/" + this.group.id, {
+				.put("/groups/me/" + this.group.id, {
 					name: this.info.name
 				})
 				.then(response => {
@@ -218,9 +218,9 @@ export default {
 				return;
 			}
 			this.$axios
-				.post("/groups/members/add", {
+				.post("/groups/me/" + this.group.id+"/members", {
 					group_id: this.group.id,
-					users: JSON.stringify(this.newMembers)
+					users: JSON.stringify(this.newMembers.map(o => o.id))
 				})
 				.then(response => {
 					this.$refs.user_select.clearSelection();
@@ -234,17 +234,18 @@ export default {
 		},
 		loadMembers() {
 			this.$axios
-				.get("/me/group/members/" + this.group.id)
+				.get("/groups/me/" + this.group.id+"/members")
 				.then(response => {
-					this.info = response.data;
+					this.info = {...this.group, members: response.data.data};
 				});
 		},
 		kickMember(member) {
 			this.updating = true;
+			console.log(JSON.stringify([member.id]));
 			this.$axios
-				.post("/me/groups/kick", {
+				.post("/groups/me/" + this.group.id+"/members?_method=DELETE", {
 					groupID: this.group.id,
-					memberID: member.id
+					members: JSON.stringify([member.id]),
 				})
 				.then(() => {
 					this.updating = false;

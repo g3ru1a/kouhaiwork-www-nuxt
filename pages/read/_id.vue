@@ -44,25 +44,19 @@ export default {
 			return;
 		}
 		let ch, next, prev;
-		let chapCache = await context.$redis.get(
-			`chapter_${context.params.id}`
-		);
-		if (chapCache != null) {
-			let parsed = JSON.parse(chapCache);
-			ch = parsed.chapter;
-			next = parsed.next_id;
-			prev = parsed.prev_id;
-		} else {
-			await context.$axios
-				.get("/chapters/" + Number(context.params.id))
-				.then(response => {
-					ch = response.data.chapter;
-					next = response.data.next_id;
-					prev = response.data.prev_id;
-					context.$redis.set("chapter_"+context.params.id, JSON.stringify(response.data), {EX: process.env.redisExpireTime});
-				})
-				.catch(err => console.log(err));
-		}
+		await context.$axios
+			.get("/chapters/get/" + Number(context.params.id))
+			.then(response => {
+				ch = response.data.chapter;
+				next = response.data.next_id;
+				prev = response.data.prev_id;
+				context.$redis.set(
+					"chapter_" + context.params.id,
+					JSON.stringify(response.data),
+					{ EX: process.env.redisExpireTime }
+				);
+			})
+			.catch(err => console.log(err));
 
 		return { chapter: ch, next_id: next, prev_id: prev };
 	},

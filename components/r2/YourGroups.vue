@@ -118,10 +118,10 @@ export default {
 			this.updating = true;
 			this.groups = [];
 			this.$axios
-				.get("/me/groups")
+				.get("/groups/me/where/any")
 				.then(response => {
 					this.updating = false;
-					this.groups = response.data;
+					this.groups = response.data.data;
 				})
 				.catch(err => {
 					this.updating = false;
@@ -131,7 +131,7 @@ export default {
 		createGroup() {
 			this.updating = true;
 			this.$axios
-				.post("/groups/create", {
+				.post("/groups/me/", {
 					name: this.newGroup
 				})
 				.then(response => {
@@ -155,7 +155,7 @@ export default {
 		leaveGroup(group) {
 			this.updating = true;
 			this.$axios
-				.post("/me/groups/leave/" + group.id)
+				.post("/groups/me/" + group.id+"/leave")
 				.then(() => {
 					this.loadGroups();
 				})

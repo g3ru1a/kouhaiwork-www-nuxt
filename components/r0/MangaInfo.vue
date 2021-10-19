@@ -1,5 +1,5 @@
 <template>
-	<div class="md:p-2 md:w-2/3">
+	<div v-if="info" class="md:p-2 md:w-2/3">
 		<h1 class="title z-50">{{ info.title }}</h1>
 		<div class="tag-container-np">
 			<p class="tag-lg status">{{ info.status }}</p>
@@ -53,11 +53,11 @@
                     </div>
                 </div>
             </template>
-            <template v-if="info.groups_arr.length > 0">
+            <template v-if="info.groups.length > 0">
                 <h2 class="header">Brought to you by</h2>
                 <div class="tag-container-np">
                     <p
-                        v-for="(group, index) in info.groups_arr"
+                        v-for="(group, index) in info.groups"
                         :key="index"
                         class="tag-lg tag-theme"
                     >

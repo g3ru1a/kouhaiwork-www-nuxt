@@ -42,7 +42,7 @@ export default {
 		recover() {
 			this.$axios({
 				method: "POST",
-				url: "/password/request",
+				url: "/auth/password/request",
 				data: {
 					email: this.email
 				}
@@ -53,7 +53,7 @@ export default {
 				})
 				.catch(error => {
 					this.success = false;
-					let err = error.response.data;
+					let err = error.response.data.error;
 					if (err.email) this.error = err.email[0];
 					if (err.message) this.error = err.message;
 				});

@@ -11,17 +11,15 @@ export default {
     middleware: ['auth'],
 	mounted() {
 		this.$axios
-			.post("/logout")
+			.post("/auth/logout")
 			.then(() => {
 				this.clearAuth();
 				window.location.href = "/";
 			})
 			.catch(error => {
 				if (error.response) {
-					if (error.response.data == "Unauthorized.") {
-						location.reload();
-						this.clearAuth();
-					}
+					window.location.href = "/";
+					this.clearAuth();
 				}
 			});
 	},

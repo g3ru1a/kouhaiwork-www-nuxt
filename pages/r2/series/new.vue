@@ -190,7 +190,7 @@ export default {
             if(this.info.demographics.length > 0) formData.append('demographics', JSON.stringify(this.info.demographics));
             if(this.info.authors.length > 0) formData.append('authors', JSON.stringify(this.info.authors));
             if(this.info.artists.length > 0) formData.append('artists', JSON.stringify(this.info.artists));
-            this.$axios.post('/mangas', formData, {
+            this.$axios.post('/groups/mangas', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -204,7 +204,7 @@ export default {
                 this.error = {};
                 // this.uploading=false;
                 this.success = true;
-                setTimeout(() => this.$router.push('/r3/series'), 2000)
+                setTimeout(() => this.$router.push('/r2/series'), 2000)
             })
             .catch(error => {
                 console.log(error.response.data)
@@ -219,23 +219,38 @@ export default {
         loadSelectOptions(){
             this.$axios
 				.get("/manga/genres")
-				.then(resp => (this.genres = resp.data))
+				.then(resp => (this.genres = resp.data.data.map(e => e={
+                    id: e[0],
+                    name: e[1],
+                })))
 				.catch(err => console.log(err.response));
 			this.$axios
 				.get("/manga/themes")
-				.then(resp => (this.themes = resp.data))
+				.then(resp => (this.themes = resp.data.data.map(e => e={
+                    id: e[0],
+                    name: e[1],
+                })))
 				.catch(err => console.log(err.response));
 			this.$axios
-				.get("/manga/demographic")
-				.then(resp => (this.demographics = resp.data))
+				.get("/manga/demographics")
+				.then(resp => (this.demographics = resp.data.data.map(e => e={
+                    id: e[0],
+                    name: e[1],
+                })))
 				.catch(err => console.log(err.response));
             this.$axios
 				.get("/manga/authors")
-				.then(resp => (this.authors = resp.data))
+				.then(resp => (this.authors = resp.data.data.map(e => e={
+                    id: e[0],
+                    name: e[1],
+                })))
 				.catch(err => console.log(err.response));
 			this.$axios
 				.get("/manga/artists")
-				.then(resp => (this.artists = resp.data))
+				.then(resp => (this.artists = resp.data.data.map(e => e={
+                    id: e[0],
+                    name: e[1],
+                })))
 				.catch(err => console.log(err.response));
         },
         addTitle(){

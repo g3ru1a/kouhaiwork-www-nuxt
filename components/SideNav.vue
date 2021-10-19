@@ -25,19 +25,20 @@
                 <a class="sidenav-link" href="/r2/upload">Upload</a>
                 <a class="sidenav-link" href="/r2/groups">My Groups</a>
                 <a class="sidenav-link" href="/r2/chapters">My Chapters</a>
+                <a class="sidenav-link" href="/r2/series">Series</a>
             </template>
             <template v-if="$store.getters.isRank3">
                 <h2 class="sidenav-header">Admin</h2>
-                <a class="sidenav-link" href="/r3/dashboard">Dashboard</a>
+                <!-- <a class="sidenav-link" href="/r3/dashboard">Dashboard</a>
                 <a class="sidenav-link" href="/r3/series">Series</a>
                 <a class="sidenav-link" href="/r3/chapters">Chapters</a>
                 <a class="sidenav-link" href="/r3/users">Users</a>
-                <a class="sidenav-link" href="/r3/groups">Groups</a>
+                <a class="sidenav-link" href="/r3/groups">Groups</a> -->
             </template>
             <template v-if="$store.state.authenticated">
                 <h2 class="sidenav-header">Me - {{$store.state.user.name}}</h2>
-                <a class="sidenav-link" href="/r1/me">Profile</a>
-                <a class="sidenav-link" href="/r1/settings">Settings</a>
+                <!-- <a class="sidenav-link" href="/r1/me">Profile</a>
+                <a class="sidenav-link" href="/r1/settings">Settings</a> -->
                 <a class="sidenav-link" href="/logout">Logout</a>
             </template>
             <template v-if="!$store.state.authenticated">

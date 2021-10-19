@@ -2,38 +2,56 @@
 	<div v-if="latest" class="banner">
 		<div class="banner-info">
 			<p class="banner-nc">New Chapter</p>
-			<a :href="`/series/${latest.id}`" class="banner-title">{{ latest.title }}</a>
+			<a :href="`/series/${latest.manga.id}`" class="banner-title">{{ latest.manga.title }}</a>
 			<div class="tag-container banner-tags">
 				<span
 					class="tag"
-					v-for="(tag, index) in latest.tags"
+					v-for="(tag, index) in tags"
 					:key="index"
 					>{{ tag }}</span
 				>
 			</div>
-			<p class="banner-synopsis">{{ latest.synopsis }}</p>
+			<p class="banner-synopsis">{{ latest.manga.synopsis }}</p>
 			<div class="banner-action">
-				<a class="banner-button" :href="`/read/${latest.latest_chapter.id}`">
+				<a class="banner-button" :href="`/read/${latest.id}`">
 					Check It Out
 				</a>
 				<p class="banner-ch">
 					<span class="text-theme-dark dark:text-theme"
 						>Chapter
 						{{
-							latest.latest_chapter.number
+							latest.number
 						}}</span
 					>
-					• {{ latest.status }}
+					• {{ latest.manga.status }}
 				</p>
 			</div>
 		</div>
-		<img class="banner-cover" :src="latest.cover" alt="" />
+		<img class="banner-cover" :src="mediaPage(latest.manga.cover)" alt="" />
 	</div>
 </template>
 
 <script>
 export default {
 	props: ['latest'],
+	data(){
+		return {
+			tags: [],
+		}
+	},
+	mounted(){
+		if(this.latest.manga.genres) this.tags.push(...this.latest.manga.genres);
+		if(this.latest.manga.themes) this.tags.push(...this.latest.manga.themes);
+		if(this.latest.manga.demographics) this.tags.push(...this.latest.manga.demographics);
+	},
+	methods: {
+		mediaPage(pageurl) {
+			let apiUrlWV = process.env.apiURL;
+			let apiurl =
+				apiUrlWV.substring(0, apiUrlWV.length - 3) + "storage/";
+			return apiurl + pageurl;
+		}
+	}
 };
 </script>
 

@@ -41,7 +41,7 @@ export default {
 			return date.toLocaleString("en-US", options);
 		},
         deletePost(id){
-            this.$axios.delete('/announcements/delete/'+id)
+            this.$axios.delete('/admins/announcements/'+id)
             .then(() => {
                 this.list = this.list.filter(e => e.id != id);
             })

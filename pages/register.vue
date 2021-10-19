@@ -69,7 +69,7 @@ export default {
 		register() {
 			this.$axios({
 				method: "POST",
-				url: "/register",
+				url: "/auth/register",
 				data: {
 					email: this.email,
 					name: this.username,
@@ -85,17 +85,17 @@ export default {
 					this.password_confirmation = "";
 					this.success =
 						"Successfully registered, we sent a verification email to: " +
-						response.data.email +
+						response.data.user.email +
 						". Click the link in the email to confirm your account.";
 				})
 				.catch(error => {
-					let err = error.response.data;
+					let err = error.response.data.error;
                     this.success = "";
 					this.error = "";
-					if (err.name) this.error += err.name[0] + "<br>";
-					if (err.email) this.error += err.email[0] + "<br>";
-					if (err.password) this.error += err.password[0] + "<br>";
 					if (err.message) this.error += err.message + "<br>";
+					if (err.errors.name) this.error += err.errors.name[0] + "<br>";
+					if (err.errors.email) this.error += err.errors.email[0] + "<br>";
+					if (err.errors.password) this.error += err.errors.password[0] + "<br>";
 				});
 		}
 	},

@@ -57,7 +57,7 @@ export default {
 		resetPassword() {
 			this.$axios({
 				method: "POST",
-				url: "/password/reset",
+				url: "/auth/password/reset",
 				data: {
                     user_id: this.$route.params.user_id,
                     token: this.$route.params.token,
@@ -74,10 +74,10 @@ export default {
 			}).catch(error => {
                 console.log(error);
                 if(error.response){
-                    let err = error.response.data;
+                    let err = error.response.data.error;
                     this.error = '';
-                    if(err.password) this.error += err.password[0] + '<br>';
                     if(err.message) this.error += err.message + '<br>';
+                    if(err.errors.password) this.error += err.errors.password[0] + '<br>';
                 }
             })
 		},

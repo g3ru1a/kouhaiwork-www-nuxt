@@ -22,16 +22,16 @@ export default {
         }
     },
     mounted() {
-        this.$axios.post(`/verify/${this.$route.params.user_id}/${this.$route.params.token}`)
+        this.$axios.post(`/auth/verify/${this.$route.params.user_id}/${this.$route.params.token}`)
         .then(response => {
-            this.success = response.data.message;
+            this.success = response.data.data.message;
             let router = this.$router;
             setTimeout(function(){
                 window.location.href = '/login';
             }, 5000);
         })
         .catch(error => {
-            this.error = error.response.data.message;
+            this.error = error.response.data.error.message;
         });
     }
 }

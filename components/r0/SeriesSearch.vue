@@ -107,7 +107,7 @@ export default {
 			let nct = null;
 			this.$axios({
 				method: "POST",
-				url: "/manga/search",
+				url: "/search/manga",
 				cancelToken: new axios.CancelToken(function executor(c) {
 					nct = c;
 				}),

@@ -9,10 +9,10 @@
                 :demographics="demographics"
                 ></series-search>
 			<series-search-results
-				v-if="results.length > 0"
+				v-if="results && results.length > 0"
 				:results="results"
 			></series-search-results>
-			<h2 v-if="results.message">{{ results.message }}</h2>
+			<h2 v-if="!results">No Series found.</h2>
 		</div>
 	</div>
 </template>
@@ -27,18 +27,13 @@ export default {
 	async asyncData(context) {
 		if(process.client) return;
 		let options;
-		let optionsCache = await context.$redis.get("search-parameters");
-		if(optionsCache != null){
-			options = JSON.parse(optionsCache);
-		}else{
-			await context.$axios
+		
+		await context.$axios
 			.get("/search/parameters")
 			.then(resp => {
 				options = resp.data;
-				context.$redis.set("search-parameters", JSON.stringify(options), {EX:process.env.redisExpireTime});
 			})
 			.catch(err => console.log(err.response));
-		}
 	
         return {
             genres: options.g.map(e => ({id: e[0], name:e[1]})),

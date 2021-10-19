@@ -16,21 +16,18 @@ export default {
 		return {};
 	},
 	async asyncData(context) {
-		if(process.client) return;
+		if (process.client) return;
 		let l;
-		let listCache = await context.$redis.get("announcements");
-		if(listCache != null){
-			l = JSON.parse(listCache);
-		}else{
-			await context.$axios
-				.get("/announcements")
-				.then(response => {
-					l = response.data;
-					context.$redis.set("announcements", JSON.stringify(l), {EX: process.env.redisExpireTime});
-				})
-				.catch(error => alert(error.response.data));
-		}
-		
+		await context.$axios
+			.get("/announcements")
+			.then(response => {
+				l = response.data.data;
+				context.$redis.set("announcements", JSON.stringify(l), {
+					EX: process.env.redisExpireTime
+				});
+			})
+			.catch(error => alert(error.response.data));
+
 		return { list: l };
 	},
 	head: {

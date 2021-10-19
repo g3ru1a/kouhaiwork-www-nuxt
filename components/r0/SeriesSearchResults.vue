@@ -30,7 +30,7 @@
 		<div class="results" :class="[view_grid ? 'grid' : 'list']">
 			<div class="result" v-for="result in processedResults" :key="result.id">
 				<div class="result-inner">
-					<img class="result-image" :src="result.cover" alt="" />
+					<img class="result-image" :src="mediaPage(result.cover)" alt="" />
 					<div class="result-info">
                         <div class="result-info-inner">
                             <h1 class="title">{{ result.title }}</h1>
@@ -54,6 +54,14 @@ export default {
 		return {
 			view_grid: true
 		};
+	},
+	methods: {
+		mediaPage(pageurl) {
+			let apiUrlWV = process.env.apiURL;
+			let apiurl =
+				apiUrlWV.substring(0, apiUrlWV.length - 3) + "storage/";
+			return apiurl + pageurl;
+		}
 	},
 	computed: {
 		processedResults(){

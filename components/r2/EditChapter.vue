@@ -37,8 +37,9 @@
 			<!-- page input -->
 			<div class="form-group">
                 <error-bubble v-if="errors.pages" :text="errors.pages"></error-bubble>
-                <p class="mb-2 text-center text-sm italic">Only add pages if you want to change or re-order them.(Adding pages will replace existing ones). File upload here is limited to 95MB, if you want to files that are bigger than that, delete and reupload the chapter.</p>
-				<button
+				<p class="mb-2 text-center text-sm italic">If you want to replace the pages you'll have to delete the chapter and reupload it.</p>
+                <!-- <p class="mb-2 text-center text-sm italic">Only add pages if you want to change or re-order them.(Adding pages will replace existing ones). File upload here is limited to 95MB, if you want to files that are bigger than that, delete and reupload the chapter.</p> -->
+				<!-- <button
 					@click="$refs.page_input.click()"
 					class="btn btn-block btn-theme-inv flex justify-center"
 				>
@@ -57,7 +58,7 @@
 						/>
 					</svg>
 					Upload Pages
-				</button>
+				</button> -->
 				<input
 					@change="onImageInputChange"
 					class="hidden"
@@ -206,7 +207,7 @@ export default {
 				return;
 			}
             this.uploading = true;
-			this.$axios.delete('/chapter/delete/'+this.$route.params.id, {}, {
+			this.$axios.delete('/groups/chapters/'+this.$route.params.id, {}, {
 				onUploadProgress: event => {
                     this.uploadPerc = Math.round(
                         (event.loaded * 100) / event.total
@@ -228,8 +229,8 @@ export default {
             let formData = new FormData();
             if(this.info.manga_id) formData.append('manga_id', this.info.manga_id);
             if(this.volume) formData.append('volume', this.volume);
-            if(this.name) formData.append('chapter_name', this.name);
-            if(this.number) formData.append('chapter', this.number);
+            if(this.name) formData.append('name', this.name);
+            if(this.number) formData.append('number', this.number);
             else {
                 this.errors = {
                     number: 'Can\'t upload without a chapter number specified.'
@@ -237,7 +238,7 @@ export default {
                 this.uploading = false;
                 return;
             }
-            if(this.group) formData.append('group_id', this.group.id);
+            if(this.group) formData.append('groups', `[${this.group.id}]`);
             else {
                 this.errors = {
                     group: 'Can\'t upload without a group selected.'
@@ -273,7 +274,7 @@ export default {
                     formData.append('pages[' + i + ']', page);
                 }
             }
-            this.$axios.post('/chapter/update/'+this.info.id, formData, {
+            this.$axios.post('/groups/chapters/'+this.info.id+'?_method=PUT', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 },
@@ -295,10 +296,16 @@ export default {
                 console.log(error.response.data)
                 if(error){
                     if(error.response){
+						let erc = error.response.data.error;
+						console.log(erc);
                         this.errors = {
-                            number: error.response.data.chapter ? error.response.data.chapter[0] : null,
-                            pages: error.response.data.pages ? error.response.data.pages[0] : null,
+                            number: erc.errors.number ? erc.errors.number[0] : null,
+                            pages: erc.errors.pages ? erc.errors.pages[0] : null,
                         }
+                        // this.errors = {
+                        //     number: error.response.data.chapter ? error.response.data.chapter[0] : null,
+                        //     pages: error.response.data.pages ? error.response.data.pages[0] : null,
+                        // }
                         if(this.errors.series){
                             this.errors.series = this.errors.series.replace('manga id', 'series');
                         }
@@ -324,25 +331,29 @@ export default {
 		},
 		async loadData() {
             await this.$axios
-                .get('/r2/chapter/'+this.$route.params.id)
+                .get('/groups/chapters/'+this.$route.params.id)
                 .then(resp => {
-                    this.info = resp.data;
+                    this.info = resp.data.data;
+					this.info = {
+						...this.info,
+						group_id: this.info.groups[0].id
+					}
                 })
 				.catch(err => console.log(err.response));
 			await this.$axios
-				.get("/r2/manga/all")
+				.get("/manga/all")
 				// .get('/manga/genres')
 				.then(resp => {
-					this.series_list = resp.data.map(
+					this.series_list = resp.data.data.map(
 						o => (o = { ...o, name: o.title })
 					);
 				})
 				.catch(err => console.log(err.response));
 			await this.$axios
-				.get("/me/groups/owner")
+				.get("/groups/me/where/owner")
 				.then(
 					resp => (
-						(this.groups_list = resp.data), (this.loaded = true)
+						(this.groups_list = resp.data.data), (this.loaded = true)
 					)
 				)
 				.catch(err => console.log(err.response));

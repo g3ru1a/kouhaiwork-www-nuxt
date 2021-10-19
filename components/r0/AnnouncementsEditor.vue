@@ -49,7 +49,7 @@ export default {
 			console.log(this.content);
             this.$axios({
                 method: 'post',
-                url: '/announcements',
+                url: '/admins/announcements',
                 data: {
                     title: this.title,
                     body: this.content,

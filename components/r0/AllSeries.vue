@@ -4,7 +4,7 @@
 		<div class="series-container">
 			<div class="series" v-for="(series, index) in all" :key="index">
 				<div class="series-inner" @click="redirectToSeries(series)">
-                    <img class="series-cover" :src="series.cover" alt="" />
+                    <img class="series-cover" :src="mediaPage(series.cover)" alt="" />
                     <div class="series-info">
                         <h1 class="series-title">{{ series.title }}</h1>
                     </div>
@@ -19,7 +19,13 @@ export default {
 	props: ['all'],
 	methods: {
 		redirectToSeries(series){
-			window.location.replace('/series/'+series.id)
+			window.location = '/series/'+series.id;
+		},
+		mediaPage(pageurl) {
+			let apiUrlWV = process.env.apiURL;
+			let apiurl =
+				apiUrlWV.substring(0, apiUrlWV.length - 3) + "storage/";
+			return apiurl + pageurl;
 		}
 	}
 };

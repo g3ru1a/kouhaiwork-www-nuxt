@@ -2,14 +2,14 @@
 	<div class="bg-white dark:bg-dt-300 dark:text-white">
 		<h1 class="week-title">Latest Chapters</h1>
 		<div class="series-container">
-			<div class="series" v-for="(series, index) in week" :key="index">
-				<div class="series-inner" @click="redirectToSeries(series)">
-                    <img class="series-cover" :src="series.cover" alt="" />
+			<div class="series" v-for="(chapter, index) in week" :key="index">
+				<div class="series-inner" @click="redirectToSeries(chapter.manga)">
+                    <img class="series-cover" :src="mediaPage(chapter.manga.cover)" alt="" />
                     <div class="series-info">
-                        <h1 class="series-title">{{ series.title }}</h1>
+                        <h1 class="series-title">{{ chapter.manga.title }}</h1>
                         <p class="series-chapter">
                             Chapter
-                            {{ series.latest_chapter_number }}
+                            {{ chapter.number }}
                         </p>
                     </div>
                 </div>
@@ -23,7 +23,13 @@ export default {
 	props: ['week'],
 	methods: {
 		redirectToSeries(series){
-			window.location.replace('/series/'+series.id)
+			window.location = '/series/'+series.id;
+		},
+		mediaPage(pageurl) {
+			let apiUrlWV = process.env.apiURL;
+			let apiurl =
+				apiUrlWV.substring(0, apiUrlWV.length - 3) + "storage/";
+			return apiurl + pageurl;
 		}
 	}
 };

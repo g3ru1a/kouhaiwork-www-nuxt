@@ -31,16 +31,16 @@
 						</button>
 					</div>
 					<div class="w-full">
-						<button @click="$router.push('/r3/series/new')" class="float-right btn btn-green w-full mt-2 md:w-auto md:mt-0">
+						<button @click="$router.push('/r2/series/new')" class="float-right btn btn-green w-full mt-2 md:w-auto md:mt-0">
 							+ New Series
 						</button>
 					</div>
 				</div>
 				<div v-if="series" class="">
                     <div class="flex flex-wrap items-start justify-evenly transition-all duration-150">
-                        <div v-for="s in filteredSeries" :key="s.id" @click="$router.push('/r3/series/edit/'+s.id)" class="p-2 w-1/2 md:w-auto">
+                        <div v-for="s in filteredSeries" :key="s.id" @click="$router.push('/r2/series/edit/'+s.id)" class="p-2 w-1/2 md:w-auto">
                             <div class="relative rounded shadow transform transition-all duration-150 hover:scale-105 cursor-pointer">
-                                <img class="h-72 w-48 object-cover rounded" :src="s.cover.url" alt="">
+                                <img class="h-72 w-48 object-cover rounded" :src="mediaPage(s.cover)" alt="">
                                 <div class="absolute pin flex flex-col bg-black bg-opacity-50 rounded flat-t text-white">
                                     <div class="flex-1 flex items-center justify-center">
                                         <h2 class="text-center font-bold">{{s.title}}</h2>
@@ -71,13 +71,19 @@ export default {
 	methods: {
 		loadMangas() {
 			this.$axios
-				.get("/admin/manga/all")
+				.get("/groups/mangas/all")
 				.then(response => {
-					this.series = response.data.reverse();
+					this.series = response.data.data.reverse();
 				})
 				.catch(error => {
 					console.log(error);
 				});
+		},
+		mediaPage(pageurl) {
+			let apiUrlWV = process.env.apiURL;
+			let apiurl =
+				apiUrlWV.substring(0, apiUrlWV.length - 3) + "storage/";
+			return apiurl + pageurl;
 		}
 	},
     computed: {

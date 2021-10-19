@@ -49,24 +49,24 @@ export default {
 		login() {
 			this.$axios({
 				method: "POST",
-				url: "/login",
+				url: "/auth/login",
 				data: {
 					email: this.email,
 					password: this.password
 				}
 			}).then(response => {
-				this.setToken(response.data.access_token);
-				this.setUser(response.data.user);
+				this.setToken(response.data.data.access_token);
+				this.setUser(response.data.data.user);
 				this.setAuthenticated(true);
 				window.location.href = "/";
 			}).catch(error => {
-                console.log(error);
+                console.log(error.response);
                 if(error.response){
-                    let err = error.response.data;
+                    let err = error.response.data.error;
                     this.error = '';
-                    if(err.email) this.error += err.email[0] + '<br>';
-                    if(err.password) this.error += err.password[0] + '<br>';
                     if(err.message) this.error += err.message + '<br>';
+                    if(err.errors.email) this.error += err.errors.email[0] + '<br>';
+                    if(err.errors.password) this.error += err.errors.password[0] + '<br>';
                 }
             })
 		},

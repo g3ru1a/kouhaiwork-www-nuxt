@@ -209,7 +209,7 @@ export default {
 			let pageDataArray = this.preparePagesData();
 			if(formData == null || pageDataArray.length == 0) return;
 
-            this.$axios.post('/chapter/upload', formData, {
+            this.$axios.post('/groups/chapters', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 },
@@ -222,10 +222,10 @@ export default {
                 console.log(response.data);
 				for (let i = 0; i < pageDataArray.length; i++) {
 					let pageData = pageDataArray[i];
-					pageData.append('chapter_id', response.data.chapter.id);
+					pageData.append('chapter_id', response.data.data.id);
 					this.uploadMsg = 'Uploading Pages... Batch '+(i+1)+'/'+pageDataArray.length;
 					console.log('batch '+(i+1)+'/'+pageDataArray.length);
-					await this.$axios.post('/chapter/upload/pages', pageData, {
+					await this.$axios.post('/groups/chapters/pages/'+response.data.data.id, pageData, {
 						headers: {
 							'Content-Type': 'multipart/form-data'
 						},
@@ -241,23 +241,6 @@ export default {
                 // this.uploading=false;
                 this.success = true;
 
-				try {
-					// let resp = await this.$axios.get("/r2/series/since/"+this.latest.latest_chapter.id);
-					// let series = resp.data.data;
-					// console.log(series);
-					axios({
-						method: "POST",
-						// url: "https://cache.kouhai.work/flush",
-						url: "http://localhost:3456/flush",
-						data: {
-							series: response.data.chapter.manga_id,
-							chapter: response.data.chapter.id
-						}
-					}).then(res => console.log('Cache Request'));
-				} catch (error) {
-					console.log(error);
-				}
-
                 if(keep){
                     this.pages = null;
                     this.order_array = null;
@@ -266,18 +249,21 @@ export default {
                     this.uploading = false;
                 }else {
                     setTimeout(() => {
-                        window.location.href = '/series/'+response.data.chapter.manga_id;
+                        window.location.href = '/series/'+response.data.data.manga_id;
                     }, 2000);
                 }
             })
             .catch(error => {
-                console.log(error.response)
+                console.log(error.response);
+				console.log(error);
                 if(error){
                     if(error.response){
+						let erc = error.response.data.error;
+						console.log(erc);
                         this.errors = {
-                            series: error.response.data.manga_id ? error.response.data.manga_id[0] : null,
-                            number: error.response.data.chapter ? error.response.data.chapter[0] : null,
-                            pages: error.response.data.pages ? error.response.data.pages[0] : null,
+                            series: erc.errors.manga_id ? erc.errors.manga_id[0] : null,
+                            number: erc.errors.number ? erc.errors.number[0] : null,
+                            pages: erc.errors.pages ? erc.errors.pages[0] : null,
                         }
                         if(this.errors.series){
                             this.errors.series = this.errors.series.replace('manga id', 'series');
@@ -290,8 +276,8 @@ export default {
 		prepareData(){
 			let formData = new FormData();
             if(this.volume) formData.append('volume', this.volume);
-            if(this.name) formData.append('chapter_name', this.name);
-            if(this.number) formData.append('chapter', this.number);
+            if(this.name) formData.append('name', this.name);
+            if(this.number) formData.append('number', this.number);
             else {
                 this.errors = {
                     number: 'Can\'t upload without a chapter number specified.'
@@ -307,7 +293,7 @@ export default {
                 this.uploading = false;
                 return null;
             }
-            if(this.group) formData.append('group_id', this.group.id);
+            if(this.group) formData.append('groups', `[${this.group.id}]`);
             else {
                 this.errors = {
                     group: 'Can\'t upload without a group selected.'
@@ -385,19 +371,18 @@ export default {
 		},
 		async loadData() {
 			await this.$axios
-				.get("/r2/manga/all")
-				// .get('/manga/genres')
+				.get("/manga/all")
 				.then(resp => {
-					this.series_list = resp.data.map(
+					this.series_list = resp.data.data.map(
 						o => (o = { ...o, name: o.title })
 					);
 				})
 				.catch(err => console.log(err.response));
 			await this.$axios
-				.get("/me/groups/owner")
+				.get("/groups/me/where/owner")
 				.then(
 					resp => (
-						(this.groups_list = resp.data), (this.loaded = true)
+						(this.groups_list = resp.data.data), (this.loaded = true)
 					)
 				)
 				.catch(err => console.log(err.response));

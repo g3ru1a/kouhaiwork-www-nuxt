@@ -1,7 +1,7 @@
 export default function ({ $axios, store, redirect  }) {
     if(!process.server){
 		return $axios
-			.post("/check", {
+			.post("/auth/check", {
 				headers: {
 					Authorization: "Bearer " + store.state.token
 				}

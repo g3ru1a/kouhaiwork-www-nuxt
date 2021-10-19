@@ -18,10 +18,10 @@
                         Chapter {{ chap.number }}
                     </h2>
                     <p>{{ chap.name }}</p>
-                    <p v-if="chap.group" class="italic">
-                        By: {{ chap.group }}
-                    </p>
-                    <p v-if="chap.group == null" class="text-sm italic">No Group</p>
+                    <div v-if="chap.groups && chap.groups.length > 0" class="italic">
+                        <p v-for="grp,i in chap.groups" :key="i">{{ (i == 0? 'By: ' : '')+grp.name+((i !== chap.groups.length-1) ? ' & ' : '')}}</p>
+                    </div>
+                    <p v-if="chap.groups == null || chap.groups.length == 0" class="text-sm italic">No Groups</p>
                 </div>
             </div>
 		</div>

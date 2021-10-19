@@ -73,7 +73,7 @@
                         title="Genres"
 						:options="genres"
 						v-on:sel_change="info.genres = $event;"
-                        :preselection="info.genres.length > 0 ? info.genres.map(e => e.id) : undefined"
+                        :preselection="info.genres && info.genres.length > 0 ? info.genres.map(e => e.id) : undefined"
 						:multiple="true"></sselect>
                 </div>
                 <div class="form-group">
@@ -82,7 +82,7 @@
                         title="Demographics"
 						:options="demographics"
 						v-on:sel_change="info.demographics = $event;"
-                        :preselection="info.demographics.length > 0 ? info.demographics.map(e => e.id) : undefined"
+                        :preselection="info.demographics && info.demographics.length > 0 ? info.demographics.map(e => e.id) : undefined"
 						:multiple="true"></sselect>
                 </div>
                 <div class="form-group">
@@ -91,7 +91,7 @@
                         title="Themes"
 						:options="themes"
 						v-on:sel_change="info.themes = $event;"
-                        :preselection="info.themes.length > 0 ? info.themes.map(e => e.id) : undefined"
+                        :preselection="info.themes && info.themes.length > 0 ? info.themes.map(e => e.id) : undefined"
 						:multiple="true"></sselect>
                 </div>
                 <div class="form-group">
@@ -100,7 +100,7 @@
                         title="Authors"
 						:options="authors"
 						v-on:sel_change="info.authors = $event;"
-                        :preselection="info.authors.length > 0 ? info.authors.map(e => e.id) : undefined"
+                        :preselection="info.authors && info.authors.length > 0 ? info.authors.map(e => e.id) : undefined"
 						:multiple="true"></sselect>
                 </div>
                 <div class="form-group">
@@ -109,7 +109,7 @@
                         title="Artists"
 						:options="artists"
 						v-on:sel_change="info.artists = $event;"
-                        :preselection="info.artists.length > 0 ? info.artists.map(e => e.id) : undefined"
+                        :preselection="info.artists && info.artists.length > 0 ? info.artists.map(e => e.id) : undefined"
 						:multiple="true"></sselect>
                 </div>
                 <div class="form-group">
@@ -231,7 +231,7 @@ export default {
             if(this.info.demographics.length > 0) formData.append('demographics', JSON.stringify(this.info.demographics));
             if(this.info.authors.length > 0) formData.append('authors', JSON.stringify(this.info.authors));
             if(this.info.artists.length > 0) formData.append('artists', JSON.stringify(this.info.artists));
-            this.$axios.post('/mangas/'+this.info.id, formData, {
+            this.$axios.post('/groups/mangas/'+this.info.id+'?_method=PUT', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -245,7 +245,7 @@ export default {
                 this.error = {};
                 // this.uploading=false;
                 this.success = true;
-                setTimeout(() => this.$router.push('/r3/series'), 2000)
+                setTimeout(() => this.$router.push('/r2/series'), 2000)
             })
             .catch(error => {
                 console.log(error.response.data)
@@ -260,40 +260,58 @@ export default {
         async loadSelectOptions(){
             await this.$axios
 				.get("/manga/genres")
-				.then(resp => (this.genres = resp.data))
+				.then(resp => (this.genres = resp.data.data.map(e => e={
+                    id: e[0],
+                    name: e[1],
+                })))
 				.catch(err => console.log(err.response));
 			await this.$axios
 				.get("/manga/themes")
-				.then(resp => (this.themes = resp.data))
+				.then(resp => (this.themes = resp.data.data.map(e => e={
+                    id: e[0],
+                    name: e[1],
+                })))
 				.catch(err => console.log(err.response));
 			await this.$axios
-				.get("/manga/demographic")
-				.then(resp => (this.demographics = resp.data))
+				.get("/manga/demographics")
+				.then(resp => (this.demographics = resp.data.data.map(e => e={
+                    id: e[0],
+                    name: e[1],
+                })))
 				.catch(err => console.log(err.response));
             await this.$axios
 				.get("/manga/authors")
-				.then(resp => (this.authors = resp.data))
+				.then(resp => (this.authors = resp.data.data.map(e => e={
+                    id: e[0],
+                    name: e[1],
+                })))
 				.catch(err => console.log(err.response));
 			await this.$axios
 				.get("/manga/artists")
-				.then(resp => (this.artists = resp.data))
+				.then(resp => (this.artists = resp.data.data.map(e => e={
+                    id: e[0],
+                    name: e[1],
+                })))
 				.catch(err => console.log(err.response));
         },
         async loadMangaInfo(){
             await this.loadSelectOptions();
             this.$axios
-				.get("/mangas/"+this.$route.params.id)
+				.get("/groups/mangas/"+this.$route.params.id)
 				.then(resp => {
                     console.log(resp);
-                    this.info = {...resp.data};
+                    this.info = {...resp.data.data};
                     this.info.cover = null;
                     if(this.info.alternative_titles == null) this.info.alternative_titles = [];
-                    this.coverPreview = resp.data.cover.url;
+                    this.coverPreview = resp.data.data.cover;
                     this.loaded = true;
                 })
 				.catch(err => {
                     console.log(err.response);
-                    this.$router.push('/r3/series/');
+                    console.log(err);
+                    if(err.response){
+                        this.$router.push('/r2/series/');
+                    }
                 });
         },
         addTitle(){
