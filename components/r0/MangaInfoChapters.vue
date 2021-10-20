@@ -43,7 +43,7 @@ export default {
 			return date.toLocaleString("en-US", options);
 		},
         redirectTo(url){
-            window.location.replace(url);
+            window.location = url;
         }
     }
 };

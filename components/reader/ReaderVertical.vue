@@ -114,10 +114,10 @@ export default {
 			this.$store.commit("setVertReaderDrawer", this.open);
 		},
 		nextChap() {
-			window.location.replace("/read/" + this.next_id);
+			window.location = "/read/" + this.next_id;
 		},
 		prevChap() {
-			window.location.replace("/read/" + this.prev_id);
+			window.location = "/read/" + this.prev_id;
 		},
 		mediaPage(pageurl) {
 			let apiUrlWV = process.env.apiURL;

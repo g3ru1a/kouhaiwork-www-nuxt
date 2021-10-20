@@ -108,7 +108,7 @@ export default {
             if(this.$store.state.reader_settings.direction == 'ver' && e.keyCode === 80 && e.shiftKey === true) this.togglePadding();
         },
         redirectTo(url){
-            window.location.replace(url);
+            window.location = url;
         }
     }
 }

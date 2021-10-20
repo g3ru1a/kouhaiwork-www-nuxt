@@ -67,7 +67,7 @@ export default {
     },
     methods: {
         redirectTo(url){
-            window.location.replace(url);
+            window.location = url;
         }
     }
 }
