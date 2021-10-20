@@ -371,7 +371,7 @@ export default {
 		},
 		async loadData() {
 			await this.$axios
-				.get("/manga/all")
+				.get("/groups/manga/all/upload")
 				.then(resp => {
 					this.series_list = resp.data.data.map(
 						o => (o = { ...o, name: o.title })
