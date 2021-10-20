@@ -184,12 +184,12 @@ export default {
             if(this.info.status) formData.append('status', this.info.status.name.toLowerCase());
             if(this.info.origin) formData.append('origin', this.info.origin);
             if(this.info.cover) formData.append('cover', this.info.cover);
-            if(this.info.alternative_titles.length > 0) formData.append('alternative_titles', JSON.stringify(this.info.alternative_titles));
-            if(this.info.genres.length > 0) formData.append('genres', JSON.stringify(this.info.genres));
-            if(this.info.themes.length > 0) formData.append('themes', JSON.stringify(this.info.themes));
-            if(this.info.demographics.length > 0) formData.append('demographics', JSON.stringify(this.info.demographics));
-            if(this.info.authors.length > 0) formData.append('authors', JSON.stringify(this.info.authors));
-            if(this.info.artists.length > 0) formData.append('artists', JSON.stringify(this.info.artists));
+            if(this.info.alternative_titles && this.info.alternative_titles.length > 0) formData.append('alternative_titles', JSON.stringify(this.info.alternative_titles));
+            if(this.info.genres && this.info.genres.length > 0) formData.append('genres', JSON.stringify(this.info.genres));
+            if(this.info.themes && this.info.themes.length > 0) formData.append('themes', JSON.stringify(this.info.themes));
+            if(this.info.demographics && this.info.demographics.length > 0) formData.append('demographics', JSON.stringify(this.info.demographics));
+            if(this.info.authors && this.info.authors.length > 0) formData.append('authors', JSON.stringify(this.info.authors));
+            if(this.info.artists && this.info.artists.length > 0) formData.append('artists', JSON.stringify(this.info.artists));
             this.$axios.post('/groups/mangas', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
