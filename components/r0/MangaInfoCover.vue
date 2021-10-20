@@ -1,13 +1,21 @@
 <template>
 	<div class="md:w-1/3 md:pr-4 relative z-10">
-		<img class="cover z-10" :src="url" alt="" />
+		<img class="cover z-10" :src="mediaPage(url)" alt="" />
 		<div class="cover-image-overlay z-10"></div>
 	</div>
 </template>
 
 <script>
 export default {
-    props: ['url']
+    props: ['url'],
+	methods: {
+		mediaPage(pageurl) {
+			let apiUrlWV = process.env.apiURL;
+			let apiurl =
+				apiUrlWV.substring(0, apiUrlWV.length - 3) + "storage/";
+			return apiurl + pageurl;
+		}
+	}
 }
 </script>
 

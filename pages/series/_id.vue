@@ -45,6 +45,11 @@ export default {
 					{ EX: process.env.redisExpireTime }
 				);
 			});
+		if(inf.authors && inf.authors.length > 0) inf.authors = inf.authors.map(e => e.name);
+		if(inf.artists && inf.artists.length > 0) inf.artists = inf.artists.map(e => e.name);
+		if(inf.genres && inf.genres.length > 0) inf.genres = inf.genres.map(e => e.name);
+		if(inf.themes && inf.themes.length > 0) inf.themes = inf.themes.map(e => e.name);
+		if(inf.demographics && inf.demographics.length > 0) inf.demographics = inf.demographics.map(e => e.name);
 		return { info: inf };
 	},
 	head() {

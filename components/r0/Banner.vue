@@ -43,6 +43,7 @@ export default {
 		if(this.latest.manga.genres) this.tags.push(...this.latest.manga.genres);
 		if(this.latest.manga.themes) this.tags.push(...this.latest.manga.themes);
 		if(this.latest.manga.demographics) this.tags.push(...this.latest.manga.demographics);
+		if(this.tags && this.tags.length > 0) this.tags = this.tags.map(e => e = e[1]);
 	},
 	methods: {
 		mediaPage(pageurl) {
