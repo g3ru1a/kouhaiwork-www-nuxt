@@ -198,7 +198,7 @@ export default {
 				return;
 			}
             this.uploading = true;
-			this.$axios.delete('/mangas/'+this.$route.params.id, {}, {
+			this.$axios.delete('/groups/mangas/'+this.$route.params.id, {}, {
 				onUploadProgress: event => {
                     this.uploadPerc = Math.round(
                         (event.loaded * 100) / event.total
