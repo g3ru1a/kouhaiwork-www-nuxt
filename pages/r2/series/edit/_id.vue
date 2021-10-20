@@ -208,7 +208,7 @@ export default {
 			.then((response)=>{
                 console.log(response);
             	this.uploading = false;
-                this.$router.push('/r3/series/');
+                this.$router.push('/r2/series/');
 			})
 			.catch(err => {
             	this.uploading = false;
