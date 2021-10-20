@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<h1 class="week-title">All Series</h1>
+		<h1 class="week-title">Newest Series</h1>
 		<div class="series-container">
 			<div class="series" v-for="(series, index) in all" :key="index">
 				<div class="series-inner" @click="redirectToSeries(series)">
