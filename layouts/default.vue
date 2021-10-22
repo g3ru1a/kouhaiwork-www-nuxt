@@ -102,7 +102,7 @@ export default {
                 this.$store.commit('setAcknowledgedCookies', true);
             }
             if(approved == true){
-                window.location.reload();
+                window.location = window.location.href;
             }
         }
     },
