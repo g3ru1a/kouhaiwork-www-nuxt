@@ -40,7 +40,7 @@
                 <div class="form-group">
                     <p class="mb-2">Cover</p>
                     <error-bubble v-if="error.cover" :text="error.cover[0]" class="rounded-b mb-2"></error-bubble>
-                    <img @click="$refs.cover_inp.click()" class="mb-2 mx-auto h-72 w-48 object-cover" :src="coverPreview ? coverPreview : '/img-place.jpg'" alt="">
+                    <img @click="$refs.cover_inp.click()" class="mb-2 mx-auto h-72 w-48 object-cover" :src="coverPreview ? mediaPage(coverPreview) : '/img-place.jpg'" alt="">
                     <button @click="$refs.cover_inp.click()" class="btn btn-block btn-theme flex items-center justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
@@ -264,7 +264,13 @@ export default {
             let file = e.target.files[0];
             this.info.cover = file;
             this.coverPreview = URL.createObjectURL(file);
-        }
+        },
+		mediaPage(pageurl) {
+			let apiUrlWV = process.env.apiURL;
+			let apiurl =
+				apiUrlWV.substring(0, apiUrlWV.length - 3) + "storage/";
+			return apiurl + pageurl;
+		}
     }
 }
 </script>
