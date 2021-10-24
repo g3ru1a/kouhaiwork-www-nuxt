@@ -67,51 +67,51 @@
                         </button>
                     </div>
                 </div>
-                <div class="form-group">
-                    <h1>Genres</h1>
-                    <sselect 
-                        title="Genres"
-						:options="genres"
-						v-on:sel_change="info.genres = $event;"
-                        :preselection="info.genres && info.genres.length > 0 ? info.genres.map(e => e.id) : undefined"
-						:multiple="true"></sselect>
-                </div>
-                <div class="form-group">
-                    <h1>Demographics</h1>
-                    <sselect 
-                        title="Demographics"
-						:options="demographics"
-						v-on:sel_change="info.demographics = $event;"
-                        :preselection="info.demographics && info.demographics.length > 0 ? info.demographics.map(e => e.id) : undefined"
-						:multiple="true"></sselect>
-                </div>
-                <div class="form-group">
-                    <h1>Themes</h1>
-                    <sselect 
-                        title="Themes"
-						:options="themes"
-						v-on:sel_change="info.themes = $event;"
-                        :preselection="info.themes && info.themes.length > 0 ? info.themes.map(e => e.id) : undefined"
-						:multiple="true"></sselect>
-                </div>
-                <div class="form-group">
-                    <h1>Authors</h1>
-                    <sselect 
-                        title="Authors"
-						:options="authors"
-						v-on:sel_change="info.authors = $event;"
-                        :preselection="info.authors && info.authors.length > 0 ? info.authors.map(e => e.id) : undefined"
-						:multiple="true"></sselect>
-                </div>
-                <div class="form-group">
-                    <h1>Artists</h1>
-                    <sselect 
-                        title="Artists"
-						:options="artists"
-						v-on:sel_change="info.artists = $event;"
-                        :preselection="info.artists && info.artists.length > 0 ? info.artists.map(e => e.id) : undefined"
-						:multiple="true"></sselect>
-                </div>
+                <MangaTagInput
+                    title="Genres"
+                    newUrl="/groups/manga/genres"
+					:options="genres"
+					v-on:sel_change="info.genres = $event;"
+                    v-on:up_complete="loadSelectOptions()"
+                    :preselection="info.genres && info.genres.length > 0 ? info.genres.map(e => e.id) : undefined"
+					:multiple="true">
+                </MangaTagInput>
+                <MangaTagInput 
+                    title="Demographics"
+                    newUrl="/groups/manga/demographics"
+					:options="demographics"
+					v-on:sel_change="info.demographics = $event;"
+                    v-on:up_complete="loadSelectOptions()"
+                    :preselection="info.demographics && info.demographics.length > 0 ? info.demographics.map(e => e.id) : undefined"
+					:multiple="true">
+                </MangaTagInput>
+                <MangaTagInput 
+                    title="Themes"
+					:options="themes"
+                    newUrl="/groups/manga/themes"
+					v-on:sel_change="info.themes = $event;"
+                    v-on:up_complete="loadSelectOptions()"
+                    :preselection="info.themes && info.themes.length > 0 ? info.themes.map(e => e.id) : undefined"
+					:multiple="true">
+                </MangaTagInput>
+                <MangaTagInput 
+                    title="Authors"
+					:options="authors"
+                    newUrl="/groups/manga/authors"
+					v-on:sel_change="info.authors = $event;"
+                    v-on:up_complete="loadSelectOptions()"
+                    :preselection="info.authors && info.authors.length > 0 ? info.authors.map(e => e.id) : undefined"
+					:multiple="true">
+                </MangaTagInput>
+                <MangaTagInput 
+                    title="Artists"
+					:options="artists"
+                    newUrl="/groups/manga/artists"
+					v-on:sel_change="info.artists = $event;"
+                    v-on:up_complete="loadSelectOptions()"
+                    :preselection="info.artists && info.artists.length > 0 ? info.artists.map(e => e.id) : undefined"
+					:multiple="true">
+                </MangaTagInput>
                 <div class="form-group">
                     <button @click="updateSeries" class="btn btn-block btn-theme">Update</button>
                 </div>

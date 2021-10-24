@@ -1,5 +1,5 @@
 <template>
-    <div class="form-error">
+    <div v-show="text !== null" class="form-error">
         <p v-html="text"></p>
     </div>
 </template>

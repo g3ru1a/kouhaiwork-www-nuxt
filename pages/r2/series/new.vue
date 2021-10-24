@@ -66,46 +66,46 @@
                         </button>
                     </div>
                 </div>
-                <div class="form-group">
-                    <h1>Genres</h1>
-                    <sselect 
-                        title="Genres"
-						:options="genres"
-						v-on:sel_change="info.genres = $event;"
-						:multiple="true"></sselect>
-                </div>
-                <div class="form-group">
-                    <h1>Demographics</h1>
-                    <sselect 
-                        title="Demographics"
-						:options="demographics"
-						v-on:sel_change="info.demographics = $event;"
-						:multiple="true"></sselect>
-                </div>
-                <div class="form-group">
-                    <h1>Themes</h1>
-                    <sselect 
-                        title="Themes"
-						:options="themes"
-						v-on:sel_change="info.themes = $event;"
-						:multiple="true"></sselect>
-                </div>
-                <div class="form-group">
-                    <h1>Authors</h1>
-                    <sselect 
-                        title="Authors"
-						:options="authors"
-						v-on:sel_change="info.authors = $event;"
-						:multiple="true"></sselect>
-                </div>
-                <div class="form-group">
-                    <h1>Artists</h1>
-                    <sselect 
-                        title="Artists"
-						:options="artists"
-						v-on:sel_change="info.artists = $event;"
-						:multiple="true"></sselect>
-                </div>
+                <MangaTagInput
+                    title="Genres"
+                    newUrl="/groups/manga/genres"
+					:options="genres"
+					v-on:sel_change="info.genres = $event;"
+                    v-on:up_complete="loadSelectOptions()"
+					:multiple="true">
+                </MangaTagInput>
+                <MangaTagInput 
+                    title="Demographics"
+                    newUrl="/groups/manga/demographics"
+					:options="demographics"
+					v-on:sel_change="info.demographics = $event;"
+                    v-on:up_complete="loadSelectOptions()"
+					:multiple="true">
+                </MangaTagInput>
+                <MangaTagInput 
+                    title="Themes"
+					:options="themes"
+                    newUrl="/groups/manga/themes"
+					v-on:sel_change="info.themes = $event;"
+                    v-on:up_complete="loadSelectOptions()"
+					:multiple="true">
+                </MangaTagInput>
+                <MangaTagInput 
+                    title="Authors"
+					:options="authors"
+                    newUrl="/groups/manga/authors"
+					v-on:sel_change="info.authors = $event;"
+                    v-on:up_complete="loadSelectOptions()"
+					:multiple="true">
+                </MangaTagInput>
+                <MangaTagInput 
+                    title="Artists"
+					:options="artists"
+                    newUrl="/groups/manga/artists"
+					v-on:sel_change="info.artists = $event;"
+                    v-on:up_complete="loadSelectOptions()"
+					:multiple="true">
+                </MangaTagInput>
                 <div class="form-group">
                     <button @click="createSeries" class="btn btn-block btn-theme">Create</button>
                 </div>
