@@ -260,14 +260,21 @@ export default {
                     if(error.response){
 						let erc = error.response.data.error;
 						console.log(erc);
-                        this.errors = {
-                            series: erc.errors.manga_id ? erc.errors.manga_id[0] : null,
-                            number: erc.errors.number ? erc.errors.number[0] : null,
-                            pages: erc.errors.pages ? erc.errors.pages[0] : null,
-                        }
+                        if(erc.errors){
+							this.errors = {
+								series: erc.errors.manga_id ? erc.errors.manga_id[0] : null,
+								number: erc.errors.number ? erc.errors.number[0] : null,
+								pages: erc.errors.pages ? erc.errors.pages[0] : null,
+							}
+						}
                         if(this.errors.series){
                             this.errors.series = this.errors.series.replace('manga id', 'series');
                         }
+						if(erc && erc.status == "406"){
+							this.errors = {
+								number: "Chapter Number is already taken.",
+							}
+						}
                     }
                 }
                 this.uploading=false;
@@ -345,7 +352,7 @@ export default {
 					lastInd = i;
 				}
 				console.log('BatchSize', totalBatchSize);
-                formData.append('pages[' + i + ']', page);
+                formData.append('pages[' + (i - lastInd) + ']', page);
                 order.push(i - lastInd);
             }
 			if(order.length > 0){

@@ -118,7 +118,7 @@
                 <div class="form-group">
                     <button @click="deleteSeries" v-show="!deletePrompt" class="btn btn-block btn-red">Delete</button>
                     <div v-show="deletePrompt">
-                        <p class="mb-2 text-center">Are you sure you want to delete the chapter?</p>
+                        <p class="mb-2 text-center">Are you sure you want to delete the series?</p>
                         <div class="btn-group noborder">
                             <button @click="deleteSeries" class="btn btn-block btn-red">Delete</button>
                             <button @click="deletePrompt = false" class="btn btn-block btn-theme">FUCK! GO BACK!</button>

@@ -190,6 +190,7 @@ export default {
 			this.$emit("edit", this.info);
 		},
 		updateName() {
+			if(this.info.name == '' || this.info.name == undefined) return;
 			this.updating = true;
 			this.$axios
 				.put("/groups/me/" + this.group.id, {

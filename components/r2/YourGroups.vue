@@ -129,6 +129,7 @@ export default {
 				});
 		},
 		createGroup() {
+			if(this.newGroup == '' || this.newGroup == undefined) return;
 			this.updating = true;
 			this.$axios
 				.post("/groups/me/", {

@@ -309,6 +309,12 @@ export default {
                         if(this.errors.series){
                             this.errors.series = this.errors.series.replace('manga id', 'series');
                         }
+
+						if(erc && erc.status == "406"){
+							this.errors = {
+								number: "Chapter Number is already taken.",
+							}
+						}
                     }
                 }
                 this.uploading=false;
