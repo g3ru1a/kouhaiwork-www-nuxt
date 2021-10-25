@@ -16,7 +16,7 @@
 					title="Groups"
 					:options="groups_list"
 					v-on:sel_change="group = $event"
-					:multiple="false"
+					:multiple="true"
 				></sselect>
 			</div>
             <error-bubble v-if="errors.number" :text="errors.number"></error-bubble>
@@ -300,7 +300,11 @@ export default {
                 this.uploading = false;
                 return null;
             }
-            if(this.group) formData.append('groups', `[${this.group.id}]`);
+            if(this.group) {
+				let group_id_array = this.group.map(e => e.id);
+				let json = JSON.stringify(group_id_array);
+				formData.append('groups', `${json}`);
+			}
             else {
                 this.errors = {
                     group: 'Can\'t upload without a group selected.'
@@ -386,7 +390,7 @@ export default {
 				})
 				.catch(err => console.log(err.response));
 			await this.$axios
-				.get("/groups/me/where/owner")
+				.get("/groups/all")
 				.then(
 					resp => (
 						(this.groups_list = resp.data.data), (this.loaded = true)

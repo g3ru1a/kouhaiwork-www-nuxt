@@ -61,7 +61,7 @@
                         :key="index"
                         class="tag-lg tag-theme"
                     >
-                        {{ group }}
+                        {{ group.name }}
                     </p>
                 </div>
             </template>

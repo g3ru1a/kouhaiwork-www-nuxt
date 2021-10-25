@@ -61,6 +61,21 @@
 					</svg>
 				</button>
 			</div>
+
+			<!-- Upload New Banner -->
+			<div>
+				<img @click="$refs.banner_input.click()" class="mb-2 mx-auto w-96 h-32 object-cover shadow" :src="bannerPreview ? bannerPreview : '/pattern.jpg'" alt="">
+				<div :class="{'btn-group': bannerUpdated}">
+					<button @click="$refs.banner_input.click()" class="btn btn-block btn-theme">
+						Select
+					</button>
+					<button v-show="bannerUpdated" @click="uploadBanner()" class="btn btn-block btn-green">
+						Upload
+					</button>
+				</div>
+				<input @change="onBannerChange"  ref="banner_input" type="file" class="hidden">
+			</div>
+
 			<div>
 				<p class="font-semibold">Add Members</p>
 				<lookup-select
@@ -148,6 +163,13 @@
 				</div>
 			</div>
 		</div>
+		<p v-if="info" class="my-2">Group Banner Preview</p>
+		<div v-if="info" class="mx-auto mt-2 relative w-96 h-32 rounded-lg shadow-lg cursor-pointer">
+			<img class="w-full h-full object-cover rounded-lg" :src="!bannerUpdated ? $mediaPage(info.banner) : (bannerPreview ? bannerPreview : '/pattern.jpg')" alt="">
+			<div class="absolute pin bg-black bg-opacity-25 rounded-lg flex items-center justify-center">
+				<h2 class="text-white font-black uppercase text-2xl">{{info.name}}</h2>
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -161,7 +183,10 @@ export default {
 			success: "",
 			error: "",
 			updating: false,
-			deletePrompt: false
+			deletePrompt: false,
+			banner: null,
+			bannerPreview: null,
+			bannerUpdated: false,
 		};
 	},
 	mounted() {
@@ -200,7 +225,7 @@ export default {
 					this.error = "";
 					this.success =
 						'Group "' +
-						response.data.name +
+						response.data.data.name +
 						'" has been successfuly updated.';
 					this.syncEdit();
 					this.updating = false;
@@ -258,7 +283,33 @@ export default {
 					this.updating = false;
 					console.log(error);
 				});
-		}
+		},
+		uploadBanner(){
+			if(this.banner == null || this.bannerUpdated == false) return;
+			this.updating = true;
+            let formData = new FormData();
+			formData.append('banner', this.banner);
+			this.$axios.post('/groups/me/'+this.group.id+'/banner', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            }).then(response => {
+                console.log(response.data);
+                this.error = {};
+				this.updating = false;
+				return;
+            })
+            .catch(error => {
+                console.log(error.response.data)
+				this.updating = false;
+            })
+		},
+		onBannerChange(e){
+            let file = e.target.files[0];
+            this.banner = file;
+            this.bannerPreview = URL.createObjectURL(file);
+			this.bannerUpdated = true;
+        },
 	}
 };
 </script>

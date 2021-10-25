@@ -126,7 +126,7 @@ export default {
 				{
 					hid: "og-image",
 					property: "og:image",
-					content: "https://api.kouhai.work/v3"+this.chapter.manga.cover
+					content: "https://api.kouhai.work/v3/"+this.chapter.manga.cover
 				},
 				{
 					hid: "og-url",

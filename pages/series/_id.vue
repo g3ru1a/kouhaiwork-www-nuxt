@@ -74,7 +74,7 @@ export default {
 				{
 					hid: "og-image",
 					property: "og:image",
-					content: "https://api.kouhai.work/v3"+this.info.cover
+					content: "https://api.kouhai.work/v3/"+this.info.cover
 				},
 				{
 					hid: "og-url",

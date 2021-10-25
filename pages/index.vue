@@ -2,7 +2,7 @@
 	<div>
 		<Banner :latest="latest"></Banner>
 		<UpdatedThisWeek class="week-section" :week="week"></UpdatedThisWeek>
-		<AllSeries class="week-section" :all="all"></AllSeries>
+		<GroupsList class="week-section" :groups="groups"></GroupsList>
 	</div>
 </template>
 
@@ -10,7 +10,7 @@
 export default {
 	async asyncData(context) {
 		if (process.client) return;
-		let w, a, l;
+		let w, g, l;
 
 		await context.$axios
 			.get("/chapters/latest")
@@ -24,9 +24,9 @@ export default {
 			.catch(err => console.log(err));
 
 		await context.$axios
-			.get("/manga/recent")
+			.get("/groups/all")
 			.then(async response => {
-				a = response.data.data;
+				g = response.data.data;
 			})
 			.catch(err => console.log(err));
 
@@ -37,7 +37,7 @@ export default {
 			})
 			.catch(err => console.log(err));
 		return {
-			all: a,
+			groups: g,
 			week: w,
 			latest: l
 		};

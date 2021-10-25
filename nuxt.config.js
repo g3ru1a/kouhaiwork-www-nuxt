@@ -42,6 +42,7 @@ export default {
 
 	// Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
 	plugins: [
+		{ src: "~plugins/globals.js", ssr: true },
 		{ src: "~plugins/nuxt-quill-plugin", ssr: false },
 		{ src: "~plugins/vuex-persist.js", ssr: false },
 		{ src: "~plugins/gtm.js", ssr: false },
