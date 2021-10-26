@@ -390,7 +390,7 @@ export default {
 				})
 				.catch(err => console.log(err.response));
 			await this.$axios
-				.get("/groups/all")
+				.get("/groups/all/true")
 				.then(
 					resp => (
 						(this.groups_list = resp.data.data), (this.loaded = true)
