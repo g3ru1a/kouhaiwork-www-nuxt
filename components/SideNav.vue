@@ -19,7 +19,7 @@
             <h2 class="sidenav-header">Kouhai Work</h2>
             <a class="sidenav-link" href="/announcements">Announcements</a>
             <a class="sidenav-link" href="/about">About Us</a>
-            <a class="sidenav-link" href="https://discord.gg/2deN4x7rUw" target="blank">Discord</a>
+            <a class="sidenav-link" href="https://discord.gg/yVv29fzfV9" target="blank">Discord</a>
             <template v-if="$store.getters.isRank2">
                 <h2 class="sidenav-header">Groups</h2>
                 <a class="sidenav-link" href="/r2/upload">Upload</a>
