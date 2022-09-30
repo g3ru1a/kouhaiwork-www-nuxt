@@ -7,7 +7,7 @@
 export default {
  mounted: function(){
   //alert('test');  
-  window.location.href = "https://discord.gg/yVv29fzfV9";
+  window.location.href = "https://discord.gg/8mmzDjKhg5";
  }
 }
 
